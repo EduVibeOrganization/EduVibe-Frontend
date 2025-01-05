@@ -1,9 +1,16 @@
+"use client";
+import { CustomInputText } from "@/public/components/custom-input-text.component";
+import {useState } from "react";
+
+
 
 
 export default function Home() {
+  const [value, setValue] = useState<string>("");
+
   return (
-   <div>
-     <h1> Hello World!</h1>
-   </div>
+    <div>
+      <CustomInputText value={value} onChange={(newValue) => setValue(newValue) } />
+    </div>
   );
 }
