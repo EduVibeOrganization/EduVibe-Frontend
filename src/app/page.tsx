@@ -1,16 +1,9 @@
 "use client";
-import { CustomInputText } from "@/public/components/custom-input-text.component";
-import {useState } from "react";
-
-
-
-
+import { AuthPage } from "@/pages/the-auth-page.page";
 export default function Home() {
-  const [value, setValue] = useState<string>("");
-
   return (
     <div>
-      <CustomInputText value={value} onChange={(newValue) => setValue(newValue) } />
+      <AuthPage/>
     </div>
   );
 }
