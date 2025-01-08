@@ -1,3 +1,5 @@
+"use client";
+import { useRouter } from "next/router";
 import { ContentIndicator } from "@/components/content-indicator.component";
 import { CustomButton } from "@/components/custom-button.component";
 import { CustomInputText } from "@/components/custom-input-text.component";
@@ -5,7 +7,8 @@ import { DecorationContainer } from "@/components/decoration-container.component
 import { SocialMediaButton } from "@/components/social-media-button.component";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { useRouter } from "next/router";
+
+
 
 function SignIn(){
     const router = useRouter();

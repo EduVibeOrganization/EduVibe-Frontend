@@ -21,7 +21,7 @@ function SignUp(){
                    <CustomInputText value="" placeHolder={"Contraseña"} onChange={(e) => console.log(e)}/> 
                    <CustomInputText value="" placeHolder={"Nombre de usuario"} onChange={(e) => console.log(e)}/> 
                    <CustomInputText value="" placeHolder={"Número de telefono"} onChange={(e) => console.log(e)}/> 
-                   <CustomButton title={"Registrate"} onSubmit={() => console.log("Iniciar Sesión")} />
+                   <CustomButton title={"Registrate"} onSubmit={() => router.push("/select-role")} />
                    <SocialMediaButton onEmitted={() => console.log("Iniciar Sesión")} icon="https://pngimg.com/uploads/google/google_PNG19635.png" background="bg-white" foreground="text-gray-500" text="Registrate con Google" isBold={false} />
                    <SocialMediaButton onEmitted={() => console.log("Iniciar Sesión")} icon="https://freelogopng.com/images/all_img/1658030243facebook-logo-white.png" background=" bg-blue-500" foreground="text-white" text="Registrate con Facebook" isBold={true} />
                    <ContentIndicator title={"Ya estás registrado?"} />
