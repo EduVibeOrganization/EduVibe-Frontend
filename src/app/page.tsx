@@ -1,9 +1,12 @@
 "use client";
-import { AuthPage } from "@/pages/the-auth-page.page";
+import SignIn from "@/pages/sign-in";
+
+
+
 export default function Home() {
   return (
     <div>
-      <AuthPage/>
+      <SignIn />
     </div>
   );
 }
