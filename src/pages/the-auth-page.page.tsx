@@ -2,6 +2,7 @@ import { ContentIndicator } from "@/components/content-indicator.component";
 import { CustomButton } from "@/components/custom-button.component";
 import { CustomInputText } from "@/components/custom-input-text.component";
 import { DecorationContainer } from "@/components/decoration-container.component";
+import { SocialMediaButton } from "@/components/social-media-button.component";
 
 export function AuthPage(){
     return (
@@ -15,6 +16,8 @@ export function AuthPage(){
                    <CustomInputText value="" placeHolder={"Email"} onChange={(e) => console.log(e)}/> 
                    <CustomInputText value="" placeHolder={"Contraseña"} onChange={(e) => console.log(e)}/> 
                    <CustomButton title={"Iniciar Sesión"} onSubmit={() => console.log("Iniciar Sesión")} />
+                   <SocialMediaButton onEmitted={() => console.log("Iniciar Sesión")} icon="https://pngimg.com/uploads/google/google_PNG19635.png" background="bg-white" foreground="text-gray-500" text="Inicia Sesión con Google" isBold={false} />
+                   <SocialMediaButton onEmitted={() => console.log("Iniciar Sesión")} icon="https://freelogopng.com/images/all_img/1658030243facebook-logo-white.png" background=" bg-blue-500" foreground="text-white" text="Inicia Sesión con Facebook" isBold={true} />
                    <ContentIndicator title={"Aún no tienes cuenta?"} />
                    <CustomButton title={"Registrate"} onSubmit={() => console.log("Iniciar Sesión")} />
                    <ContentIndicator title={"Olvidaste tu contraseña?"} />
