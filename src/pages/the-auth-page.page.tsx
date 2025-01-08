@@ -1,3 +1,4 @@
+import { ContentIndicator } from "@/components/content-indicator.component";
 import { CustomButton } from "@/components/custom-button.component";
 import { CustomInputText } from "@/components/custom-input-text.component";
 import { DecorationContainer } from "@/components/decoration-container.component";
@@ -14,6 +15,10 @@ export function AuthPage(){
                    <CustomInputText value="" placeHolder={"Email"} onChange={(e) => console.log(e)}/> 
                    <CustomInputText value="" placeHolder={"Contraseña"} onChange={(e) => console.log(e)}/> 
                    <CustomButton title={"Iniciar Sesión"} onSubmit={() => console.log("Iniciar Sesión")} />
+                   <ContentIndicator title={"Aún no tienes cuenta?"} />
+                   <CustomButton title={"Registrate"} onSubmit={() => console.log("Iniciar Sesión")} />
+                   <ContentIndicator title={"Olvidaste tu contraseña?"} />
+                   <CustomButton title={"Recuperar cotraseña"} onSubmit={() => console.log("Iniciar Sesión")} />
                 </div>         
             </div>
         </div>
