@@ -5,7 +5,7 @@ import { DecorationContainer } from "@/components/decoration-container.component
 import { SocialMediaButton } from "@/components/social-media-button.component";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function SignUp(){
     const router = useRouter();
