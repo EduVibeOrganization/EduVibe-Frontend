@@ -1,5 +1,5 @@
 import { DecorationContainer } from "@/components/decoration-container.component";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
 import { RoleCard } from "@/components/role-card.component";

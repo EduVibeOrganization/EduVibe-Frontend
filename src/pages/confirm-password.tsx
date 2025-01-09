@@ -4,7 +4,7 @@ import { CustomInputText } from "@/components/custom-input-text.component";
 import { DecorationContainer } from "@/components/decoration-container.component";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 function ConfirmPassowrd(){
     const router = useRouter();
@@ -16,7 +16,7 @@ function ConfirmPassowrd(){
                  </div>
                  <div className="flex flex-col justify-center items-center mt-32 gap-5 lg:ml-96">
                    <h1 className="text-center text-white font-bold text-5xl"> Ingresa nueva contraseña</h1>
-                   <CustomInputText value="" placeHolder={"Contraseña"} onChange={(e) => console.log(e)}/> 
+                   <CustomInputText value="" placeHolder={"Contraseña"} onChange={(e) => console.log(e)} hasBorder={false}/> 
                    <CustomButton title={"Confirmar"} onSubmit={() => console.log("Iniciar Sesión")} />
                     <div className="ml-20 mt-16">
                       <ContentIndicator title={"Deseas volver al inicio de sesión?"} />

@@ -1,6 +1,12 @@
 :root{
     --right-position: translateX(100%);
     --left-position: translateX(-70%);
+    --breakpoint-mobile: 480px;
+    --breakpoint-tablet: 768px;
+    --breakpoint-laptop: 1024px;
+    --breakpoint-desktop: 1366px;
+    --breakpoint-ultrawide: 2560px;
+
 }
 
 .custom-container {
@@ -15,6 +21,27 @@
 .auth-page-container {
     width: 100%;
     height: 100vh;
+}
+
+.form-size{
+    width: 600px;
+    height: 600px;
+}
+
+@media (max-width: 768px) {
+    .form-size{
+        width: 450px;
+        height: 350px;
+    }
+    
+}
+
+@media (max-width: 480px) {
+    .form-size{
+        width: 380px;
+        height: 300px;
+    }
+    
 }
 
 
