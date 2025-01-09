@@ -1,0 +1,10 @@
+.selector-container {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.selector-option {
+    display: flex;
+    align-items: center;
+}
