@@ -7,13 +7,16 @@ import { CustomSelectorComponent } from "@/components/custom-selector.component"
 import { useState } from "react";
 import { CustomInputSwitch } from "@/components/custom-input-switch.component";
 import { CustomRow } from "@/components/custom-row.component";
+import { CustomButton } from "@/components/custom-button.component";
 
 function ConferenceCreation(){
     const router = useRouter();
-    const [privacy, setPrivacy] = useState<string>("privado");
+    const [privacy, setPrivacy] = useState<string>("Privado");
+    const [chat, setChat] = useState<string>("Básico");
     return(
-        <div className="bg-gray-300 auth-page-container">
-            <div className="flex flex-col justify-center items-center mt-10 gap-5 lg:ml-96">
+        <div className="creation-background">
+            <div className="card-container">
+                <div className="card">
                 <CustomRow 
                 label={"Nombre"} 
                 component={<CustomInputText value={""} placeHolder={"Nombre"} onChange={(e) => console.log(e)}/>}
@@ -26,6 +29,16 @@ function ConferenceCreation(){
                     label={"Compartir Pantalla"} 
                     component={<CustomInputSwitch/>}
                 />
+                <CustomRow 
+                    label={"Chat de Texto"} 
+                    component={ <CustomSelectorComponent value={chat} options={["No", "Básico", "Avanzado"]} onChange={(value) => setChat(value)}/> }
+                />
+                <CustomRow 
+                    label={"Sala de espera"} 
+                    component={<CustomInputSwitch/>}
+                />
+                <CustomButton title={"Crear Sala"} onSubmit={() => router.push("/sign-in")}></CustomButton>
+                </div>
             </div>
         </div>
     );

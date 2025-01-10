@@ -10,7 +10,7 @@ export function CustomInputText({value, onChange, placeHolder}: ICustomInputText
   return (
     <InputText
     className='w-96 rounded-xl bg-white'
-    style={{ padding: '0.5rem' }} 
+    style={{ padding: '0.5rem', width: '100%'}} 
       placeholder={placeHolder}
       value= {value}
       onChange={(e) => onChange(e.target.value)}
