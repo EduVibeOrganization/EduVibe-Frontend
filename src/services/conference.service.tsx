@@ -1,9 +1,10 @@
+import { RoomResponseDTO } from "@/models/room-response.dto";
 import http from "./http-common";
 
 export class ConferenceService {
     endpoint = "/rooms"
 
-    getRooms(){
+    async getRooms(): Promise<Array<RoomResponseDTO>>{
         return http.get(this.endpoint);
     }
 

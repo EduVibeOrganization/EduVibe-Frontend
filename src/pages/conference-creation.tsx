@@ -13,6 +13,7 @@ function ConferenceCreation(){
     const router = useRouter();
     const [privacy, setPrivacy] = useState<string>("Privado");
     const [chat, setChat] = useState<string>("Básico");
+
     return(
         <div className="creation-background">
             <div className="card-container">
@@ -38,6 +39,8 @@ function ConferenceCreation(){
                     component={<CustomInputSwitch/>}
                 />
                 <CustomButton title={"Crear Sala"} onSubmit={() => router.push("/sign-in")}></CustomButton>
+                <CustomButton title={"Ver Salas"} onSubmit={() => router.push("/conference-list")}></CustomButton>
+                <CustomButton title={"Regresar"} onSubmit={() => router.push("/sign-in")}></CustomButton>
                 </div>
             </div>
         </div>
