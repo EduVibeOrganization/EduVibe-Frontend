@@ -1,14 +1,15 @@
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
+import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { useRouter } from "next/navigation";
 import { CustomInputText } from "@/components/custom-input-text.component";
 import { CustomSelectorComponent } from "@/components/custom-selector.component";
 import { useState } from "react";
+import { CustomInputSwitch } from "@/components/custom-input-switch.component";
 
 function ConferenceCreation(){
     const router = useRouter();
     const [privacy, setPrivacy] = useState<string>("privado");
-    const [color, setColor] = useState<string>("rojo");
 
     return(
         <div className="bg-gray-300 auth-page-container">
@@ -24,12 +25,8 @@ function ConferenceCreation(){
                     />
                 </div>
                 <div>
-                    <h1>Colores</h1>
-                    <CustomSelectorComponent
-                        value={color}
-                        options={["Rojo", "Azul", "Verde"]}
-                        onChange={(value) => setColor(value)}
-                    />
+                    <h1>Compartir Pantalla</h1>
+                    <CustomInputSwitch/>
                 </div>
             </div>
         </div>

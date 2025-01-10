@@ -23,6 +23,7 @@ export function CustomSelectorComponent ({options, value,  onChange}: ICustomSel
                             checked={value === optionValue}
                             onChange={() => onChange(optionValue)}
                         />
+                        <span className='space'/>
                         <label htmlFor={`option-${index}`}>{label}</label>
                     </div>
                 );
