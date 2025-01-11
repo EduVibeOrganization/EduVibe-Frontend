@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
 import { CustomSideBar } from "@/components/custom-sidebar.component";
@@ -6,11 +7,11 @@ import { CustomSideBar } from "@/components/custom-sidebar.component";
 function HelpCenterTeacher() {
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <div className="hidden lg:block lg:w-1/4 bg-white shadow-md border-none">
+            <div className="hidden lg:block bg-white shadow-md border-none">
                 <CustomSideBar />
             </div>
 
-            {/* Contenido principal */}
+            {/* Main content */}
             <div className="flex-1 flex flex-col items-center p-6 lg:px-12">
                 <header className="w-full max-w-4xl text-center mb-12">
                     <h1 className="text-4xl font-bold text-gray-800 mb-3">Centro de Ayuda para Profesores</h1>
@@ -27,7 +28,18 @@ function HelpCenterTeacher() {
                     </div>
                 </header>
 
-                {/* Preguntas Frecuentes */}
+                {/* Back Button */}
+                <div className="mb-8">
+                    <Link
+                        href="/help-center"
+                        className="inline-flex items-center text-cyan-600 hover:text-cyan-800 font-semibold text-lg py-2 px-6 border border-cyan-600 rounded-lg transition-colors duration-300"
+                    >
+                        <i className="fas fa-arrow-left mr-2"></i>
+                        Regresar al Centro de Ayuda
+                    </Link>
+                </div>
+
+                {/* Frequently Asked Questions */}
                 <main className="w-full max-w-4xl">
                     <section className="mb-12">
                         <h2 className="text-2xl font-semibold text-gray-700 mb-6">Preguntas Frecuentes</h2>
@@ -47,7 +59,7 @@ function HelpCenterTeacher() {
                         </ul>
                     </section>
 
-                    {/* Categorías de Ayuda */}
+                    {/* Help Categories */}
                     <section>
                         <h2 className="text-2xl font-semibold text-gray-700 mb-6">Categorías de Ayuda</h2>
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
@@ -75,13 +87,13 @@ function HelpCenterTeacher() {
                     </section>
                 </main>
 
-                {/* Pie de página */}
+                {/* Footer */}
                 <footer className="mt-12 text-center">
                     <p className="text-gray-600">
                         ¿Necesitas más ayuda?{" "}
-                        <a href="/contact" className="text-cyan-600 underline">
+                        <Link href="/contact" className="text-cyan-600 underline">
                             Contáctanos
-                        </a>
+                        </Link>
                     </p>
                 </footer>
             </div>

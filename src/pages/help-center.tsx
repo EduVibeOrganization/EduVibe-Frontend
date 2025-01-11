@@ -17,11 +17,11 @@ function HelpCenter() {
 
     return (
         <div className="flex min-h-screen bg-gray-50">
-            <div className="hidden lg:block lg:w-1/4 bg-white shadow-md border-none">
+            <div className="hidden lg:block bg-white shadow-md border-none">
                 <CustomSideBar />
             </div>
 
-            {/* Contenido principal */}
+            {/* Main Content */}
             <div className="flex-1 flex flex-col justify-center items-center p-6">
                 <div className="text-center p-8 max-w-lg bg-white shadow-lg rounded-lg">
                     <h1 className="text-4xl font-bold text-gray-800 mb-6">Bienvenido al Centro de Ayuda</h1>
