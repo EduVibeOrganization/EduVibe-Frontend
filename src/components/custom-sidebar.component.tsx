@@ -11,7 +11,7 @@ export function CustomSideBar(){
             <SidebarItem title="Transactions" icon="https://static.thenounproject.com/png/1341083-200.png" onClick={() => navigator.push("/home-student")} />
             <SidebarItem title="Help Center" icon="https://static-00.iconduck.com/assets.00/help-circle-icon-1024x1024-8xws9u0o.png" onClick={() => navigator.push("/home-student")} />
             <SidebarItem title="Settings" icon="https://static-00.iconduck.com/assets.00/settings-icon-256x256-rq772wz6.png" onClick={() => navigator.push("/home-student")} />
-            <SidebarItem title="Profile" icon="https://icon-library.com/images/profile-png-icon/profile-png-icon-1.jpg" onClick={() => navigator.push("/profile")} />
+            <SidebarItem title="Profile" icon="https://icon-library.com/images/profile-png-icon/profile-png-icon-1.jpg" onClick={() => navigator.push("/my-profile")} />
         </div>
     )
 }

@@ -32,7 +32,9 @@ function SignIn(){
         try{
           await authService.signIn(userToAuthenticate).then((response) => {
             const token = response.data.token;
+            const id = response.data.id;
             sessionStorage.setItem("token", token);
+            sessionStorage.setItem("id", id);
           });
 
           alert("Has iniciado sesión correctamente!!");

@@ -2,6 +2,30 @@
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
 import { CustomSideBar } from "@/components/custom-sidebar.component";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { UserService } from '../services/user.service';
+import { Profile } from "../models/profile.dto";
+function MyProfile(){
+    const navigator = useRouter();
+    const [userService] = useState<UserService>(new UserService());
+    const [profile, setProfile] = useState<Profile>({ username: "", email: "", phoneNumber: "", role: "" });
+    useEffect(() => {
+        if (!sessionStorage.getItem("token")) {
+            navigator.push("/sign-in");
+        }
+        const id = sessionStorage.getItem("id");
+        if (id) {
+            userService.getUserById(Number(id)).then((response) => {
+                const role = response.data.role;
+                const username = response.data.username;
+                const email = response.data.email;
+                const phoneNumber = response.data.phoneNumber;
+                setProfile({ username, email, phoneNumber, role });
+            });
+        }
+
+    },[]);
 
     const user = {
         name: "Pepito Perez",
@@ -48,11 +72,11 @@ import { CustomSideBar } from "@/components/custom-sidebar.component";
                                 alt="User Avatar"
                                 className="w-24 h-24 rounded-full shadow-lg"
                             />
-                            <h2 className="mt-4 text-xl font-bold text-gray-800">{user.name}</h2>
-                            <p className="text-sm text-gray-500">{user.email}</p>
-                            <p className="text-sm text-gray-500">{user.phone}</p>
+                            <h2 className="mt-4 text-xl font-bold text-gray-800">{profile.username}</h2>
+                            <p className="text-sm text-gray-500">{profile.email}</p>
+                            <p className="text-sm text-gray-500">{profile.phoneNumber}</p>
                             <p className="text-sm text-gray-500 mt-2">
-                                Miembro desde <span className="font-medium">{user.memberSince}</span>
+                                {profile.role} desde {user.memberSince}
                             </p>
                             <p className="text-sm text-gray-500">
                                 <span className="font-medium">{user.completedCourses}</span> cursos
@@ -119,6 +143,6 @@ import { CustomSideBar } from "@/components/custom-sidebar.component";
             </main>
         </div>
     );
-};
 
-export default Profile;
+}
+export default MyProfile;
