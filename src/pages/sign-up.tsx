@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 function SignUp(){
     const router = useRouter();
     return (
-        <div className="bg-sky-400 auth-page-container">
+        <div className="bg-sky-400 page-size">
            <div className="flex justify-center items-center ">
                  <div className="hidden lg:block">
                     <DecorationContainer />
