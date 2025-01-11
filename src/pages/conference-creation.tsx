@@ -20,7 +20,7 @@ function ConferenceCreation(){
                 <div className="card">
                 <CustomRow 
                 label={"Nombre"} 
-                component={<CustomInputText value={""} placeHolder={"Nombre"} onChange={(e) => console.log(e)}/>}
+                component={<CustomInputText value={""} placeHolder={"Nombre"} onChange={(e) => console.log(e)} hasBorder={false}/>}
                 />
                 <CustomRow 
                     label={"Privacidad"} 
