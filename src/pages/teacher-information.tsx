@@ -4,7 +4,7 @@ import "../app/assets/styles/public.css";
 import { FormItem } from "@/app/auth/components/form-item.component";
 function TeacherInformation(){
     return (
-        <div className="bg-sky-400 auth-page-container">
+        <div className="bg-sky-400 page-size">
              <div className="flex justify-center items-center ">
                  <div className="hidden lg:block">
                     <AuthIndicatorDecoration 
