@@ -16,7 +16,10 @@
     transform: var(--left-position);
   }
   
-
+.content-container {
+    display: flex;
+    height: 100%;
+}
 
 .page-size {
     width: 100%;
