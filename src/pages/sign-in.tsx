@@ -24,7 +24,6 @@ function SignIn(){
                    <SocialMediaButton onEmitted={() => console.log("Iniciar Sesión")} icon="https://freelogopng.com/images/all_img/1658030243facebook-logo-white.png" background=" bg-blue-500" foreground="text-white" text="Inicia Sesión con Facebook" isBold={true} />
                    <ContentIndicator title={"Aún no tienes cuenta?"} />
                    <CustomButton title={"Registrate"} onSubmit={() => router.push("/sign-up")} />
-                     <CustomButton title={"Prueba"} onSubmit={() => router.push("/conference-creation")}/>
                    <ContentIndicator title={"Olvidaste tu contraseña?"} />
                    <CustomButton title={"Recuperar cotraseña"} onSubmit={() => router.push("recover-password")} />
                 </div>
