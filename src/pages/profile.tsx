@@ -1,9 +1,8 @@
-import React from "react";
+
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
 import { CustomSideBar } from "@/components/custom-sidebar.component";
 
-const Profile: React.FC = () => {
     const user = {
         name: "Pepito Perez",
         email: "pepitoperez@gmail.com",
@@ -32,7 +31,6 @@ const Profile: React.FC = () => {
             },
         ],
     };
-
     return (
         <div className="flex min-h-screen bg-gray-100">
             <div className="hidden lg:block bg-white shadow-md border-none">
