@@ -29,7 +29,7 @@ function SignIn(){
                    <CustomButton title={"Registrate"} onSubmit={() => router.push("/sign-up")} />
                    <ContentIndicator title={"Olvidaste tu contraseña?"} />
                    <CustomButton title={"Recuperar cotraseña"} onSubmit={() => router.push("recover-password")} />
-                </div>         
+                </div>
             </div>
         </div>
       );
