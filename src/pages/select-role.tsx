@@ -22,6 +22,7 @@ function SelectRole(){
         try{
             const userToRegister = new SignUpDTO(signUpModel.email, signUpModel.password, signUpModel.username, signUpModel.phoneNumber, "" ,signUpModel.roleId);
             await authSevice.signUp(userToRegister);
+            alert("Te has registrado correctamente!!");
             router.push("/sign-in");
         } catch (_){
           alert("Ha ocurrido un error al registrar el usuario");
