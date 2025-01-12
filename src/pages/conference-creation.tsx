@@ -44,6 +44,7 @@ function ConferenceCreation(){
                     />
                     <CustomButton title={"Crear Sala"} onSubmit={() => router.push("/sign-in")}></CustomButton>
                     <CustomButton title={"Ver Salas"} onSubmit={() => router.push("/conference-list")}></CustomButton>
+                    <CustomButton title={"Entrar"} onSubmit={() => router.push("/conference-screen")}></CustomButton>
                     <CustomButton title={"Regresar"} onSubmit={() => router.push("/sign-in")}></CustomButton>
                     </div>
                 </div>
