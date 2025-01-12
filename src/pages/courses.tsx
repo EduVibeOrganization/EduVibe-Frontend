@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
 import CourseCard, { Course } from "@/components/course-card";
 import { CustomSideBar } from "@/components/custom-sidebar.component";
 import Cart from "@/components/cart";
 import Modal from "@/components/modal";
+import { Paginator } from 'primereact/paginator';
+import { CourseService } from "@/services/course.service";
 
 const Courses: React.FC = () => {
     const [cart, setCart] = useState<Course[]>([]);
@@ -12,6 +14,28 @@ const Courses: React.FC = () => {
     const [isCartOpen, setIsCartOpen] = useState(false);
     const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
     const [addedCourse, setAddedCourse] = useState<number | null>(null);
+    const [first, setFirst] = useState(0);
+    const [courseService] = useState(new CourseService());
+    const [courses, setCourses] = useState<Course[]>([]);
+
+    useEffect(() => {
+        try{
+            courseService.getCoursesByPage(1, 10).then((response) => {
+                setCourses(response.data);
+            });
+        } catch (_){
+            setCourses([]);
+        }
+    }, []);
+
+
+
+    const onPageChange = (event: any) => {
+        setFirst(event.first);
+        courseService.getCoursesByPage(event.page + 1, 10).then((response) => {
+            setCourses(response.data);
+        });
+    };
 
     const addToCart = (course: Course) => {
         setCart([...cart, course]);
@@ -43,36 +67,11 @@ const Courses: React.FC = () => {
         setIsCartOpen(false);
     };
 
-    const courses: Course[] = [
-        {
-            id: 1,
-            title: "JavaScript Avanzado",
-            description: "De Junior a Senior",
-            rating: 4.8,
-            price: "150.99",
-            image: "https://stride.com.co/wp-content/uploads/2023/01/gabriel-heinzer-g5jpH62pwes-unsplash-1536x1152.jpg",
-        },
-        {
-            id: 2,
-            title: "Python para Ciencia de Datos",
-            description: "Manipulación de datos",
-            rating: 4.7,
-            price: "140.99",
-            image: "https://cdn.ourcodeworld.com/public-media/articles/articleocw-5dbb5b040dc23.webp",
-        },
-        {
-            id: 3,
-            title: "React Hooks Avanzados",
-            description: "Estructuras y patrones",
-            rating: 4.9,
-            price: "160.99",
-            image: "https://i.ytimg.com/vi/mOz5eNcEHu4/maxresdefault.jpg",
-        },
-    ];
+
 
     return (
-        <div className="flex min-h-screen bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100">
-            <div className="hidden lg:block lg:w-1/4 bg-white shadow-md border-none">
+        <div className="page-size flex bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100">
+            <div className="hidden lg:block">
                 <CustomSideBar />
             </div>
 
@@ -80,28 +79,40 @@ const Courses: React.FC = () => {
                 <h1 className="text-3xl font-extrabold mb-8 text-white">Explora nuestros cursos</h1>
 
                 <div className="flex justify-between mb-6">
-                    <h2 className="text-2xl font-semibold text-white">Cursos Disponibles</h2>
+                    <h2 className="text-md w-2/4 lg:w-auto md:text-xl lg:text-2xl font-semibold text-white">Cursos Disponibles</h2>
                     <button
                         onClick={openCart}
-                        className="text-white bg-cyan-500 hover:bg-cyan-600 py-2 px-4 rounded-md"
+                        className="text-white bg-cyan-500 hover:bg-cyan-600 py-2 px-2  md:px-4 rounded-md"
                     >
                         🛒 Ver Carrito ({cart.length})
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {courses.map((course) => (
-                        <div key={course.id} className="relative">
-                            <CourseCard course={course} addToCart={addToCart} openModal={openModal} />
-                            {/* Mostrar el mensaje visual cuando el curso es añadido al carrito owo*/}
-                            {addedCourse === course.id && (
-                                <div className="absolute top-0 right-0 bg-green-500 text-white text-sm p-2 rounded-md">
-                                    ¡Curso añadido al carrito!
+                {
+                  courses.length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                            {courses.map((course) => (
+                                <div key={course.id} className="relative">
+                                    <CourseCard course={course} addToCart={addToCart} openModal={openModal} />
+                                    {addedCourse === course.id && (
+                                        <div className="absolute top-0 right-0 bg-green-500 text-white text-sm p-2 rounded-md">
+                                            ¡Curso añadido al carrito!
+                                        </div>
+                                    )}
                                 </div>
-                            )}
+                            ))}
                         </div>
-                    ))}
+                    ) : (
+                        <div className="text-white  text-center font-bold text-xl lg:text-3xl p-14 md:p-20 lg:p-28  xl:p-32">
+                            No existen cursos disponibles
+                        </div>
+                )}
+
+
+                <div className="card mt-10">
+                   <Paginator first={first} rows={10} totalRecords={50} onPageChange={onPageChange} template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} />
                 </div>
+
             </div>
 
             {isModalOpen && selectedCourse && (
