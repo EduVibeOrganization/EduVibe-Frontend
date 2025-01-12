@@ -20,7 +20,7 @@ const Courses: React.FC = () => {
 
     useEffect(() => {
         try{
-            courseService.getCoursesByPage(1, 10).then((response) => {
+            courseService.getCoursesByPage(1, 6).then((response) => {
                 setCourses(response.data);
             });
         } catch (_){
@@ -32,7 +32,7 @@ const Courses: React.FC = () => {
 
     const onPageChange = (event: any) => {
         setFirst(event.first);
-        courseService.getCoursesByPage(event.page + 1, 10).then((response) => {
+        courseService.getCoursesByPage(event.page + 1, 6).then((response) => {
             setCourses(response.data);
         });
     };
@@ -110,7 +110,7 @@ const Courses: React.FC = () => {
 
 
                 <div className="card mt-10">
-                   <Paginator first={first} rows={10} totalRecords={50} onPageChange={onPageChange} template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} />
+                   <Paginator first={first} rows={courses.length > 6 ? courses.length / 6 : 1} totalRecords={10} onPageChange={onPageChange} template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} />
                 </div>
 
             </div>
