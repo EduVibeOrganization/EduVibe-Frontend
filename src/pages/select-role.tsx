@@ -20,7 +20,7 @@ function SelectRole(){
             return;
         }
         try{
-            const userToRegister = new SignUpDTO(signUpModel.email, signUpModel.password, signUpModel.username, signUpModel.phoneNumber, "" ,signUpModel.roleId);
+            const userToRegister = new SignUpDTO(signUpModel.email, signUpModel.password, signUpModel.username, signUpModel.phoneNumber, "https://static.vecteezy.com/system/resources/previews/019/879/186/non_2x/user-icon-on-transparent-background-free-png.png" ,signUpModel.roleId);
             await authSevice.signUp(userToRegister);
             alert("Te has registrado correctamente!!");
             router.push("/sign-in");

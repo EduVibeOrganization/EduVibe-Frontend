@@ -17,7 +17,7 @@ function MyProfile(){
         const id = sessionStorage.getItem("id");
         if (id) {
             userService.getUserById(Number(id)).then((response) => {
-                const role = response.data.role;
+                const role = response.data.userRole;
                 const username = response.data.username;
                 const email = response.data.email;
                 const phoneNumber = response.data.phoneNumber;
@@ -76,7 +76,7 @@ function MyProfile(){
                             <p className="text-sm text-gray-500">{profile.email}</p>
                             <p className="text-sm text-gray-500">{profile.phoneNumber}</p>
                             <p className="text-sm text-gray-500 mt-2">
-                                {profile.role} desde {user.memberSince}
+                                {profile.role.charAt(0).toUpperCase() + profile.role.slice(1).toLowerCase()}
                             </p>
                             <p className="text-sm text-gray-500">
                                 <span className="font-medium">{user.completedCourses}</span> cursos
