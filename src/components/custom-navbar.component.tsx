@@ -82,38 +82,37 @@ export function CustomNavBar({categories, isAuthenticated}: ICustomNavBarProps) 
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-16 left-0 w-full bg-white shadow-md z-10">
+        <div className="md:hidden absolute top-16 right-0 w-96 z-50 text-end bg-white shadow-md">
           <ul>
-            <li
-              className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-              onClick={() => router.push("/")}
-            >
-              Programación
-            </li>
-            <li
-              className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-              onClick={() => router.push("/")}
-            >
-              Diseño
-            </li>
-            <li
-              className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-              onClick={() => router.push("/")}
-            >
-              Negocios
-            </li>
-            <li className="py-2 px-4 border-t-2 border-gray-100">
-              <button
-                className="w-full text-[#23A8E1] py-2 px-4 rounded-md hover:bg-gray-100"
-                onClick={() => router.push("/sign-in")}>Iniciar Sesión
-              </button>
-            </li>
-            <li>
-              <button
-                className="w-full bg-[#23A8E1] text-white py-2 px-4 rounded-md hover:bg-[#1D8FBC]"
-                onClick={() => router.push("/sign-up")}>Regístrate
-              </button>
-            </li>
+           {
+            categories.map((category: any) =>(
+              <li
+                key={category.type}
+                className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                onClick={() => router.push(`/courses?category=${category}`)}>
+                {category.type}
+              </li>
+             )
+            )}
+
+            {
+              isAuthenticated ? null : (
+               <div>
+                 <li className="py-2 px-4 border-t-2 border-gray-100">
+                  <button
+                    className="w-full text-[#23A8E1] py-2 px-4 rounded-md hover:bg-gray-100"
+                    onClick={() => router.push("/sign-in")}>Iniciar Sesión
+                  </button>
+                </li>
+                <li>
+                  <button
+                    className="w-full bg-[#23A8E1] text-white py-2 px-4 rounded-md hover:bg-[#1D8FBC]"
+                    onClick={() => router.push("/sign-up")}>Regístrate
+                  </button>
+               </li>
+               </div>
+              )
+            }
           </ul>
         </div>
       )}
