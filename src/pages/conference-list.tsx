@@ -8,13 +8,14 @@ import { useEffect, useState } from "react";
 function ConferenceList() {
     const router = useRouter();
 
-    const [rooms, setRooms] = useState<Array<RoomResponseDTO>>([]);
+    const [rooms, setRooms] = useState<RoomResponseDTO[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     const conferenceService = new ConferenceService();
     const getAllRooms = async () => {
         try {
             const response = await conferenceService.getRooms();
+            console.log("Respuesta de getRooms:", response);
             setRooms(response);
         } catch (error) {
             console.error("Error al obtener las salas:", error);

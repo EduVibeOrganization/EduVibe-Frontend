@@ -5,8 +5,9 @@ import { RoomPresenceResponseDTO } from "@/models/room-presence-response.dto";
 export class ConferenceService {
     endpoint = "/rooms"
 
-    async getRooms(): Promise<Array<RoomResponseDTO>>{
-        return http.get(this.endpoint);
+    async getRooms(): Promise<RoomResponseDTO[]> {
+        const response = await http.get(this.endpoint);
+        return response.data ?? [];
     }
 
     getRoomByName(name: string){
