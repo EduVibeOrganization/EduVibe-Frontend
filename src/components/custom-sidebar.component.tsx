@@ -1,4 +1,4 @@
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import { SidebarItem } from "./sibebar-item.component";
 
 export function CustomSideBar(){
