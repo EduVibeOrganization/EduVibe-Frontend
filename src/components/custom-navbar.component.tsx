@@ -82,7 +82,7 @@ export function CustomNavBar({categories, isAuthenticated}: ICustomNavBarProps) 
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-16 right-0 w-96 z-50 text-end bg-white shadow-md">
+        <div className="md:hidden absolute top-16 right-0 w-48 z-50 text-end bg-white shadow-md">
           <ul>
            {
             categories.map((category: any) =>(

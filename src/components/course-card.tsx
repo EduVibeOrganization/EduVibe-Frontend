@@ -1,4 +1,4 @@
-import React from "react";
+import { useRouter } from "next/navigation";
 
 export interface Course {
     id: number;
@@ -11,11 +11,11 @@ export interface Course {
 
 interface CourseCardProps {
     course: Course;
-    addToCart: (course: Course) => void;
     openModal: (course: Course) => void;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, addToCart, openModal }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, openModal }) => {
+    const navigator = useRouter();
     return (
         <div
             className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-2 p-5 cursor-pointer"
@@ -34,15 +34,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, addToCart, openModal })
             </div>
             <button
                 className="bg-cyan-500 hover:bg-cyan-600 text-white w-full py-2 mt-4 rounded-md transition transform hover:scale-105"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    addToCart(course);
-                }}
+                onClick={() => navigator.push(`/course-info?id=${course.id}`)}
             >
-                Añadir al Carrito
+                Ver información
             </button>
         </div>
     );
 };
 
 export default CourseCard;
+
+
