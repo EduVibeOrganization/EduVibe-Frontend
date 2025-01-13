@@ -1,5 +1,6 @@
 import { RoomResponseDTO } from "@/models/room-response.dto";
 import http from "./http-common";
+import { RoomPresenceResponseDTO } from "@/models/room-presence-response.dto";
 
 export class ConferenceService {
     endpoint = "/rooms"
@@ -12,7 +13,7 @@ export class ConferenceService {
         return http.get(`${this.endpoint}/${name}`);
     }
 
-    getRoomByNameWithPresence(name: string){
+    getRoomByNameWithPresence(name: string): Promise<RoomPresenceResponseDTO>{
         return http.get(`${this.endpoint}/${name}/presence`);
     }
 
