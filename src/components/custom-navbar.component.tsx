@@ -1,8 +1,13 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import "primeicons/primeicons.css";
 
-export function CustomNavBar() {
+interface ICustomNavBarProps {
+   categories: string[];
+   isAuthenticated: boolean;
+}
+
+export function CustomNavBar({categories, isAuthenticated}: ICustomNavBarProps) {
   const router = useRouter();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -22,18 +27,15 @@ export function CustomNavBar() {
             </button>
             <div className="absolute left-0 mt-2 w-48 bg-white shadow-md rounded-md z-10 hidden group-hover:block">
               <ul>
-                <li
-                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => router.push("/")}>Programación
-                </li>
-                <li
-                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => router.push("/")}>Diseño
-                </li>
-                <li
-                  className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
-                  onClick={() => router.push("/")}>Negocios
-                </li>
+                {
+                  categories.map((category: any) => (
+                    <li
+                      key={category.type}
+                      className="py-2 px-4 hover:bg-gray-100 cursor-pointer"
+                      onClick={() => router.push(`/courses?category=${category}`)}>
+                      {category.type}
+                    </li>
+                  ))}
               </ul>
             </div>
           </div>
@@ -58,21 +60,25 @@ export function CustomNavBar() {
             <i className="pi pi-search text-xl" />
           </button>
         </div>
-
-        <div className="hidden lg:flex items-center space-x-6">
-          <button
-            className="bg-[#23A8E1] text-white py-2 px-4 rounded-md hover:scale-105 transition"
-            onClick={() => router.push("/sign-in")}
-          >
-            Iniciar Sesión
-          </button>
-          <button
-            className="bg-gray-100 text-[#23A8E1] py-2 px-4 rounded-md hover:bg-gray-200 transition"
-            onClick={() => router.push("/sign-up")}
-          >
-            Regístrate
-          </button>
-        </div>
+        {
+          !isAuthenticated ?  (
+            <div className="hidden lg:flex items-center space-x-6">
+            <button
+                className="bg-[#23A8E1] text-white py-2 px-4 rounded-md hover:scale-105 transition"
+                onClick={() => router.push("/sign-in")}
+              >
+                Iniciar Sesión
+              </button>
+              <button
+                className="bg-gray-100 text-[#23A8E1] py-2 px-4 rounded-md hover:bg-gray-200 transition"
+                onClick={() => router.push("/sign-up")}
+              >
+                Regístrate
+              </button>
+            </div>
+          )
+          : null
+        }
       </div>
 
       {isMobileMenuOpen && (
