@@ -17,7 +17,7 @@ export class ConferenceService {
         return http.get(`${this.endpoint}/${name}/presence`);
     }
 
-    createRoom(name: string, privacy: string, properties: Record<string, any>){
+    createRoom(name: string, privacy: string, properties: Record<string, any>): Promise<RoomResponseDTO>{
         return http.post(this.endpoint, {name,privacy, properties});
     }
 
