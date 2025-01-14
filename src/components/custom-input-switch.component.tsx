@@ -1,6 +1,5 @@
 import React, { useState } from 'react'; 
 import { InputSwitch, InputSwitchChangeEvent } from 'primereact/inputswitch';
-import "../app/assets/styles/conference-creation.css"
 
 interface ICustomInputSwitch {
     onChange: (value: boolean) => void;
