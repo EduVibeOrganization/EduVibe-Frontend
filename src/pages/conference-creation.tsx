@@ -45,7 +45,7 @@ function ConferenceCreation(){
     }
 
     return(
-        <div className="creation-background">
+        <div className="content-background">
             <div className="content-container">
                 <CustomSideBar />
                 <div className="card-container">

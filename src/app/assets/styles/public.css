@@ -15,10 +15,24 @@
     left: 0;
     transform: var(--left-position);
   }
-  
+
+.content-background {
+    margin: none;
+    width: 100vw;
+    height: 100vh;
+}
+
 .content-container {
     display: flex;
     height: 100%;
+    width: 100%;
+}
+
+.title {
+    font-weight:900;
+    font-size: xx-large;
+    color: white;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
 }
 
 .page-size {
