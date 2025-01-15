@@ -25,8 +25,8 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
     const conferenceService = new ConferenceService();
 
     const [name, setName] = useState<string>('');
-    const [privacy, setPrivacy] = useState<string>('private');
-    const [enableChat, setEnableChat] = useState<string>("Básico");
+    const [privacy, setPrivacy] = useState<string>('');
+    const [chatType, setChatType] = useState<string>('');
     const [enableScreenShare, setEnableScreenShare] = useState<boolean>(false);
     const [enable_hand_raising, setHandRaising] = useState<boolean>(false);
     const [enable_prejoin_ui, setPrejoinUI] = useState<boolean>(false);
@@ -34,24 +34,34 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
     useEffect(() => {
         if (room) {
             setName(room.room_name);
-            setPrivacy(room.privacy);
+            (room.privacy == "public")? setPrivacy("Público") : setPrivacy("Privado");
             if(room.enable_chat){
-                (room.enable_advanced_chat)? setEnableChat("Avanzado") : setEnableChat("Básico");
+                (room.enable_advanced_chat)? setChatType("Avanzado") : setChatType("Básico");
             } else {
-                setEnableChat("No");
+                setChatType("No");
             }
             setEnableScreenShare(room.enable_screenshare);
+            setHandRaising(room.enable_hand_raising);
+            setPrejoinUI(room.enable_prejoin_ui);
         }
     }, [room]);
 
     const handleUpdateRoom = async () => {
         try {
-            await conferenceService.updateRoom(name, privacy, {
-                enable_chat: enableChat,
-                enable_screenshare: enableScreenShare,
-                enable_hand_raising: enable_hand_raising,
-                enable_prejoin_ui: enable_prejoin_ui
-            });
+            const privacySelected = (privacy == "Público")? "public" : "private";
+            const chatSelected = (chatType == "No")? false : true;
+            const advacedChat = (chatType == "Básico")? false : true;
+            await conferenceService.updateRoom(
+                name, 
+                privacySelected, 
+                {
+                    enable_chat: chatSelected,
+                    enable_advanced_chat: advacedChat,
+                    enable_screenshare: enableScreenShare,
+                    enable_hand_raising: enable_hand_raising,
+                    enable_prejoin_ui: enable_prejoin_ui
+                }
+            );
             onUpdate();
             onHide();
             alert("Sala actualizada correctamente");
@@ -78,23 +88,23 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
                 <div className="card">
                     <CustomRow 
                         label={'Privacidad'} 
-                        component={<CustomSelectorComponent value={privacy} options={['private', 'public']} onChange={setPrivacy} />}
+                        component={<CustomSelectorComponent value={privacy} options={["Privado", "Público"]} onChange={setPrivacy} />}
                     />
                     <CustomRow 
                         label={'Chat de Texto'} 
-                        component={<CustomSelectorComponent value={enableChat} options={["No", "Básico", "Avanzado"]} onChange={setEnableChat}/>}
+                        component={<CustomSelectorComponent value={chatType} options={["No", "Básico", "Avanzado"]} onChange={setChatType}/>}
                     />
                     <CustomRow
                         label={'Compartir Pantalla'}
-                        component={<CustomInputSwitch onChange={setEnableScreenShare} />}
+                        component={<CustomInputSwitch initialValue={enableScreenShare} onChange={setEnableScreenShare} />}
                     />
                     <CustomRow 
                         label={'Levantar la mano'} 
-                        component={<CustomInputSwitch onChange={setHandRaising} />}
+                        component={<CustomInputSwitch initialValue={enable_hand_raising} onChange={setHandRaising} />}
                     />
                     <CustomRow 
                         label={'Sala de espera'} 
-                        component={<CustomInputSwitch onChange={setPrejoinUI} />}
+                        component={<CustomInputSwitch initialValue={enable_prejoin_ui} onChange={setPrejoinUI} />}
                     />
                 </div>
         </Dialog>

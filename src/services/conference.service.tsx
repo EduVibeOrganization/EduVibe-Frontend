@@ -23,7 +23,7 @@ export class ConferenceService {
     }
 
     updateRoom(name: string, privacy?: string, properties?: Record<string, any> ) {
-        return http.post(`${this.endpoint}/rooms/${name}`, {name,privacy, properties});
+        return http.post(`${this.endpoint}/${name}`, {name,privacy, properties});
     }
 
     deleteRoom(name: string){
