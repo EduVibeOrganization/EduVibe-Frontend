@@ -10,7 +10,7 @@ export class ConferenceService {
         return response.data ?? [];
     }
 
-    getRoomByName(name: string){
+    getRoomByName(name: string): Promise<RoomResponseDTO> {
         return http.get(`${this.endpoint}/${name}`);
     }
 

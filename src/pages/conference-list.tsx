@@ -7,7 +7,7 @@ import { CustomSideBar } from '@/components/custom-sidebar.component';
 import { ConferenceService } from '@/services/conference.service';
 import { RoomResponseDTO } from '@/models/room-response.dto';
 import { CustomButtonDX } from '@/components/custom-button-dx.component';
-import  React  from 'react';
+import { EditRoomDialog } from '@/components/edit-conference.dialog';
 
 import "../app/assets/styles/conference-list.css";
 import "../app/assets/styles/public.css";
@@ -19,7 +19,10 @@ function ConferenceList() {
     const router = useRouter();
     const [rooms, setRooms] = useState<RoomResponseDTO[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
+    const [selectedRoom, setSelectedRoom] = useState<RoomResponseDTO | null>(null);
+    const [dialogVisible, setDialogVisible] = useState<boolean>(false);
     const conferenceService = new ConferenceService();
+
     const getAllRooms = async () => {
         try {
             const response = await conferenceService.getRooms();
@@ -34,14 +37,10 @@ function ConferenceList() {
     useEffect(() => { getAllRooms(); }, []);
 
     const roomTemplate = (room: RoomResponseDTO) => {
-        const privacyIcon = room.privacy === "private" ? (
-            <FaLock className="text-red-500" title="Privada" />
-        ) : (
-            <TfiWorld  className="text-green-500" title="Pública" />
-        );
+        const privacyIcon = room.privacy === "private" ? <FaLock className="text-red-500" /> : <TfiWorld className="text-green-500" />;
 
         return (
-            <div className="room-list">
+            <div className="room-list" onClick={() => { setSelectedRoom(room); setDialogVisible(true); }}>
                 <div className="room-item">
                     {privacyIcon}
                     <div>
@@ -52,8 +51,8 @@ function ConferenceList() {
                 <CustomButtonDX 
                     title="Unirse" 
                     size="small"
-                    icon='pi pi-sign-in'
-                    iconPosition='right'
+                    icon="pi pi-sign-in"
+                    iconPosition="right"
                     onSubmit={() => router.push(room.url)}
                 />
             </div>
@@ -65,8 +64,8 @@ function ConferenceList() {
             <div className="content-container">
                 <CustomSideBar />
                 <div className="list-container">
-                    <h1 className="title"> Lista de Conferencias</h1>
-                    {loading ? ( <p>Cargando salas...</p> ) : rooms.length === 0 ? ( <p>No hay salas disponibles.</p>) : (
+                    <h1 className="title">Lista de Conferencias</h1>
+                    {loading ? (<p>Cargando salas...</p>) : rooms.length === 0 ? (<p>No hay salas disponibles.</p>) : (
                         <div className="order-list">
                             <OrderList
                                 dataKey="room_name"
@@ -76,12 +75,18 @@ function ConferenceList() {
                                 header="Salas Disponibles"
                                 dragdrop
                                 filter
-                                filterBy='room_name'
+                                filterBy="room_name"
                                 style={{ width: '100%' }}
                             />
                         </div>
                     )}
                 </div>
+                <EditRoomDialog
+                    visible={dialogVisible}
+                    onHide={() => setDialogVisible(false)}
+                    room={selectedRoom}
+                    onUpdate={getAllRooms}
+                />
             </div>
         </div>
     );
