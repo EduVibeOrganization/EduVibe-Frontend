@@ -40,7 +40,7 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
             } else {
                 setChatType("No");
             }
-            setEnableScreenShare(room.enable_screenshare);
+            (room.enable_screenshare)? setEnableScreenShare(false) : setEnableScreenShare(true);
             setHandRaising(room.enable_hand_raising);
             setPrejoinUI(room.enable_prejoin_ui);
         }
