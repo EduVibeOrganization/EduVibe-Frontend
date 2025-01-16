@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
 import { DailyProvider, useCallObject, DailyVideo } from '@daily-co/daily-react';
 import { ConferenceService } from '@/services/conference.service';
 function ConferenceScreen() {
+    const router = useRouter();
     const callObject = useCallObject({});
     const [participants, setParticipants] = useState({});
     const [remoteUsers, setRemoteUsers] = useState<string[]>([]);
-    const roomName = "Prueba";
+    const roomName = router.query.room as string;
     const roomUrl = `https://handin.daily.co/${roomName}`;
     const conferenceService = new ConferenceService();
 

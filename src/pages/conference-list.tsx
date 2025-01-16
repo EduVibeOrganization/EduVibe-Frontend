@@ -57,7 +57,7 @@ function ConferenceList() {
                         color='#4c33ff'
                         onSubmit={(e: any) => {
                             e.stopPropagation();
-                            router.push(`/conference-screen?room=${room.url}`);
+                            router.push(`/conference-screen?room=${room.room_name}`);
                         }}
                     />
                     <CustomButtonDX 
