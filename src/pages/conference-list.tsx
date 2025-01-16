@@ -48,13 +48,29 @@ function ConferenceList() {
                         <p className="text-sm text-gray-500 capitalize">{room.privacy}</p>
                     </div>
                 </div>
-                <CustomButtonDX 
-                    title="Unirse" 
-                    size="small"
-                    icon="pi pi-sign-in"
-                    iconPosition="right"
-                    onSubmit={() => router.push(room.url)}
-                />
+                <div>
+                    <CustomButtonDX
+                        title="Unirse desde Handin"
+                        size='small'
+                        icon="pi pi-sign-in"
+                        iconPosition="right"
+                        color='#4c33ff'
+                        onSubmit={(e: any) => {
+                            e.stopPropagation();
+                            router.push(`/conference-screen?room=${room.url}`);
+                        }}
+                    />
+                    <CustomButtonDX 
+                        title="Abrir en Daily.co" 
+                        size="small"
+                        icon="pi pi-sign-in"
+                        iconPosition="right"
+                        onSubmit={(e: any) => {
+                            e.stopPropagation();
+                            router.push(room.url);
+                        }}
+                    />
+                </div>
             </div>
         );
     };

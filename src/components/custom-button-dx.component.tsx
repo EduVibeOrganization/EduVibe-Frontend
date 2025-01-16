@@ -6,7 +6,7 @@ interface ICustomButtonDX {
     color?: string;
     icon?: string;
     iconPosition?: 'left' | 'right';
-    onSubmit: () => void;
+    onSubmit: (e?:any) => void;
 }
 
 export function CustomButtonDX ({title, size = 'medium', color = '#06b6d4', icon, iconPosition = 'left', onSubmit} : ICustomButtonDX ) {
