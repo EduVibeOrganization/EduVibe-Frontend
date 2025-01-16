@@ -95,7 +95,7 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
                     title="Eliminar Sala" 
                     onSubmit={handleDeleteRoom}
                     color='red'
-                    icon="pi pi-check"
+                    icon="pi pi-trash"
                 />
             </div>
         );
