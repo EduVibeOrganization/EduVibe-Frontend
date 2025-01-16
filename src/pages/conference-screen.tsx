@@ -1,27 +1,30 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { DailyProvider, useCallObject, DailyVideo } from '@daily-co/daily-react';
 import { ConferenceService } from '@/services/conference.service';
+import { useSearchParams } from 'next/navigation'
+
 function ConferenceScreen() {
-    const router = useRouter();
+    const searchParams = useSearchParams();
     const callObject = useCallObject({});
     const [participants, setParticipants] = useState({});
     const [remoteUsers, setRemoteUsers] = useState<string[]>([]);
-    const roomName = router.query.room as string;
+    const [totalCount, setTotalCount] = useState<number>(0);
+    const roomName =  searchParams?.get('room') as string;
     const roomUrl = `https://handin.daily.co/${roomName}`;
     const conferenceService = new ConferenceService();
 
     const handleParticipantsUpdate = () => {
         if (callObject) {
             setParticipants(callObject.participants());
-            console.log(participants);
         }
     };
 
     const fetchRemoteParticipants = async () => {
         const response = await conferenceService.getRoomByNameWithPresence(roomName);
-        if (response && response.users) {
-            setRemoteUsers(response.users.map(user => user.id));
+        console.log(response.total_count);
+        if (response && response.users.length > 0) {
+            setTotalCount(response.total_count);
+            setRemoteUsers(response.users.map((user) => user.id));
         }
     };
 
@@ -45,6 +48,7 @@ function ConferenceScreen() {
 
     return (
         <div>
+            <h1>{totalCount}</h1>
             <DailyProvider callObject={callObject}>
                 <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                     {Object.values(participants).map((participant) =>

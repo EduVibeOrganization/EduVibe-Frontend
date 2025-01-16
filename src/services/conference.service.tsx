@@ -1,6 +1,6 @@
 import { RoomResponseDTO } from "@/models/room-response.dto";
-import http from "./http-common";
 import { RoomPresenceResponseDTO } from "@/models/room-presence-response.dto";
+import http from "./http-common";
 
 export class ConferenceService {
     endpoint = "/rooms"
@@ -14,8 +14,13 @@ export class ConferenceService {
         return http.get(`${this.endpoint}/${name}`);
     }
 
-    getRoomByNameWithPresence(name: string): Promise<RoomPresenceResponseDTO>{
-        return http.get(`${this.endpoint}/${name}/presence`);
+    async getRoomByNameWithPresence(name: string): Promise<RoomPresenceResponseDTO>{
+        const response = await http.get(`${this.endpoint}/${name}/presence`);
+        return new RoomPresenceResponseDTO(
+            response.data.room_name,
+            response.data.total_count,
+            response.data.users
+        );
     }
 
     createRoom(name: string, privacy: string, properties: Record<string, any>): Promise<RoomResponseDTO>{
