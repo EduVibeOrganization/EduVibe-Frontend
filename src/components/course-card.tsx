@@ -1,17 +1,12 @@
+import { CourseDTO } from "@/models/course.dto";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
+import React from "react";
 
-export interface Course {
-    id: number;
-    title: string;
-    description: string;
-    rating: number;
-    price: string;
-    image: string;
-}
 
 interface CourseCardProps {
-    course: Course;
-    openModal: (course: Course) => void;
+    course: CourseDTO;
+    openModal: (course: CourseDTO) => void;
 }
 
 const CourseCard: React.FC<CourseCardProps> = ({ course, openModal }) => {
@@ -19,10 +14,10 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, openModal }) => {
     return (
         <div
             className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-2 p-5 cursor-pointer"
-            onClick={() => openModal(course)}
-        >
-            <img
-                src={course.image}
+            onClick={() => openModal(course)}>
+            <Image 
+            width={300}  height={200}
+                src={course.banner}
                 alt={course.title}
                 className="w-full h-40 object-cover rounded-md transition-transform duration-300 ease-in-out transform hover:scale-105"
             />

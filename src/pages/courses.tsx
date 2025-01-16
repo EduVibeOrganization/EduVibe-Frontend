@@ -1,21 +1,22 @@
 import React, { useEffect, useState } from "react";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import CourseCard, { Course } from "@/components/course-card";
+import CourseCard from "@/components/course-card";
 import { CustomSideBar } from "@/components/custom-sidebar.component";
 import Cart from "@/components/cart";
 import Modal from "@/components/modal";
 import { Paginator } from 'primereact/paginator';
 import { CourseService } from "@/services/course.service";
+import { CourseDTO } from "@/models/course.dto";
 
 const Courses: React.FC = () => {
-    const [cart, setCart] = useState<Course[]>([]);
+    const [cart, setCart] = useState<CourseDTO[]>([]);
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [selectedCourse, setSelectedCourse] = useState<Course | null>(null);
+    const [selectedCourse, setSelectedCourse] = useState<CourseDTO | null>(null);
     const [addedCourse, setAddedCourse] = useState<number | null>(null);
     const [first, setFirst] = useState(0);
     const [courseService] = useState(new CourseService());
-    const [courses, setCourses] = useState<Course[]>([]);
+    const [courses, setCourses] = useState<CourseDTO[]>([]);
     const [openCart, setOpenCart] = useState(false);
 
     useEffect(() => {
@@ -37,7 +38,7 @@ const Courses: React.FC = () => {
         });
     };
 
-    const addToCart = (course: Course) => {
+    const addToCart = (course: CourseDTO) => {
         setCart([...cart, course]);
         setAddedCourse(course.id);
         setTimeout(() => {
@@ -49,7 +50,7 @@ const Courses: React.FC = () => {
         setCart(cart.filter((course) => course.id !== id));
     };
 
-    const openModal = (course: Course) => {
+    const openModal = (course: CourseDTO) => {
         setSelectedCourse(course);
         setIsModalOpen(true);
     };

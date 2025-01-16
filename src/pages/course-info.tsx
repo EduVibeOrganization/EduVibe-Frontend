@@ -8,21 +8,25 @@ import { useEffect, useState } from "react";
 import { Rating } from "primereact/rating";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { GoalService } from "@/services/goal.service";
+import Image from "next/image";
+import { SectionCard } from "@/components/section-card.component";
+import { SectionService } from "@/services/section.service";
 
 
 function CourseInfo(){
-    const [course, setCourse] = useState(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1), 0.5,"Hola", "Hola"));
+    const [course, setCourse] = useState(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1), 0.5,"Hola", "Hola",0,"",0,0));
     const [goals, setGoals] = useState(new Array<CourseItemDTO>());
     const [sections, setSections] = useState(new Array<CourseItemDTO>());
-    const [requirements, setRequirements] = useState(new Array<CourseItemDTO>());
+
     const [courseService] = useState(new CourseService());
     const [goalService] = useState(new GoalService());
+    const [sectionService] = useState(new SectionService());
 
     useEffect(() => {
         const courseId = new URLSearchParams(window.location.search).get("id");
         try{
             courseService.getCourseById(Number(courseId)).then((response) => {
-                const courseData = new CourseDTO(response.data.title, response.data.rating, new Date(response.data.start_date), new Date(response.data.end_date), response.data.progress_rate, response.data.subtitle, response.data.description);
+                const courseData = new CourseDTO(response.data.title, response.data.rating, new Date(response.data.start_date), new Date(response.data.end_date), response.data.progress_rate, response.data.subtitle, response.data.description, response.data.hours, response.data.banner, response.data.price, response.data.id);
                 setCourse(courseData);
             }).then(() => {
                 goalService.getGoalsByCourseId(Number(courseId)).then((response) => {
@@ -30,9 +34,16 @@ function CourseInfo(){
                 });
             });
         } catch(_){
-            setCourse(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1), 0.5,"Hola", "Hola"));
+            setCourse(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1), 0.5,"Hola", "Hola", 0, "", 0, 0));
         }
 
+        try{
+            sectionService.getSectionsByCourseId(Number(courseId)).then((response) => {
+                setSections(response.data);
+            });
+        } catch(_){
+            setSections([]);
+        }
 
 
     },[]);
@@ -45,9 +56,8 @@ function CourseInfo(){
                 <h1 className="font-semibold bg-blue-300 w-fit p-2 rounded-xl text-xl lg:text-3xl"> {course.title.charAt(0).toUpperCase() + course.title.slice(1)}</h1>
                 <div className="flex justify-evenly mt-12">
                     <div className="flex flex-col gap-8">
-                         <h4 className="font-semibold bg-blue-300 w-fit p-2 rounded-xl text-xl lg:text-3xl"> Introducción a IoT en agrícola</h4>
-                         <p className="text-sm lg:text-base"> Alto ahí, quieres aprender lo último en tecnología, en hora buena.
-                           Aprende la última versión de IoT owo</p>
+                         <h4 className="font-semibold bg-blue-300 w-fit p-2 rounded-xl text-xl lg:text-3xl"> {course.subtitle}</h4>
+                         <p className="text-sm lg:text-base"> {course.description}</p>
                            <p className="text-sm lg:text-base"> ¿Qué aprenderás? </p>
                            <div className="flex flex-col gap-2 ml-4 text-sm lg:text-base">
                             {
@@ -55,7 +65,7 @@ function CourseInfo(){
                                     return <GoalCard title={goal.title}/>
                                 })
                             }
-                            <div className="mt-5 flex justify-between">
+                            <div className="mt-5 flex justify-between gap-5">
                               <Rating value={course.rating} cancel={false} />
                               <div className="flex gap-2">
                                     <i className="pi pi-calendar ml-5" style={{ fontSize: '1.5rem' }}></i>
@@ -66,12 +76,22 @@ function CourseInfo(){
                                     {new Intl.DateTimeFormat('es-ES', { year: 'numeric' }).format(course.endDate)}
                                     </p>
                               </div>
-                              <p> 28 horas </p>
-                              <p> Intermedio </p>
+                              <div className="flex  gap-2">
+                              <p> { course.hours } </p>
+                              <p> Horas </p>
+                              </div>
                             </div>
+                            <div className="mt-8 flex flex-col gap-5">
+                               {
+                                sections.map((section) => {
+                                    return <SectionCard section={section}/>
+                                }
+                                )
+                              }
+                              </div>
                            </div>
                     </div>
-                    <img src="/public/images/m1.jpg" alt="Course Banner" className="w-96 h-96 hidden lg:block"/>
+                    <Image width={450} height={50} src={course.banner} alt={course.title} className=" hidden lg:block"/>
                 </div>
             </section>
            </div>

@@ -36,7 +36,6 @@ function SignIn(){
             sessionStorage.setItem("token", token);
             sessionStorage.setItem("id", id);
           });
-
           alert("Has iniciado sesión correctamente!!");
           router.push("/home-student");
         } catch (_){
