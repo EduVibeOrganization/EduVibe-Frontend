@@ -1,9 +1,9 @@
 interface ICustomRow {
-    label: string;
+    label: React.ReactNode;
     component: React.ReactNode;
 }
 
-export function CustomRow ({ label, component }: ICustomRow) {
+export function CustomRow({ label, component }: ICustomRow) {
     return (
         <div className="flex items-center w-full gap-5">
             <h1 className="w-1/3 text-right">{label}</h1>
