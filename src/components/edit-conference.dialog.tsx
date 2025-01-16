@@ -71,12 +71,30 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
         }
     };
 
+    const handleDeleteRoom = async () => {
+        try {
+            await conferenceService.deleteRoom(name);
+            onUpdate();
+            onHide();
+            alert("Sala eliminada correctamente");
+        } catch (error) {
+            alert("Error al eliminar la sala");
+            console.error("Error al eliminar la sala:", error);
+        }
+    }
+
     const footerTemplate = () => {
         return (
             <div>
                 <CustomButtonDX 
                     title="Actualizar Sala" 
                     onSubmit={handleUpdateRoom} 
+                    icon="pi pi-check"
+                />
+                <CustomButtonDX 
+                    title="Eliminar Sala" 
+                    onSubmit={handleDeleteRoom}
+                    color='red'
                     icon="pi pi-check"
                 />
             </div>
