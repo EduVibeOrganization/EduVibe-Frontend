@@ -22,12 +22,12 @@ function ConferenceCreation(){
     const [enable_prejoin_ui, setPrejoinUI] = useState<boolean>(false);
     const conferenceService = new ConferenceService();
 
-    function createRoom(){
+    const createRoom = async() => {
         try {
             const privacySelected = (privacy == "Público")? "public" : "private";
             const chatSelected = (enable_chat == "No")? false : true;
             const advacedChat = (enable_chat == "Básico" || !chatSelected)? false : true;
-            conferenceService.createRoom(
+            await conferenceService.createRoom(
                 name, 
                 privacySelected, 
                 {
