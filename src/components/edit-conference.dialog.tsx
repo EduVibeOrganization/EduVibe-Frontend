@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog } from 'primereact/dialog';
-import { CustomInputText } from '@/components/custom-input-text.component';
 import { CustomSelectorComponent } from '@/components/custom-selector.component';
 import { CustomInputSwitch } from '@/components/custom-input-switch.component';
 import { CustomButtonDX } from '@/components/custom-button-dx.component';

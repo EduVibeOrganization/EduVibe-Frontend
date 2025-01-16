@@ -86,7 +86,6 @@ function ConferenceList() {
                             <OrderList
                                 dataKey="room_name"
                                 value={rooms}
-                                onChange={(e) => setRooms(e.value)}
                                 itemTemplate={roomTemplate}
                                 header="Salas Disponibles"
                                 dragdrop
@@ -99,7 +98,10 @@ function ConferenceList() {
                 </div>
                 <EditRoomDialog
                     visible={dialogVisible}
-                    onHide={() => setDialogVisible(false)}
+                    onHide={() => {
+                        setDialogVisible(false);
+                        setSelectedRoom(null);
+                    }}
                     room={selectedRoom}
                     onUpdate={getAllRooms}
                 />
