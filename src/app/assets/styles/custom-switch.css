@@ -1,0 +1,36 @@
+button {
+    font-weight: 500;
+}
+
+.text-gray-700, .text-gray-800 {
+    color: #2D3748;
+}
+
+input::placeholder {
+    color: #A0AEC0;
+}
+
+.bg-white {
+    background-color: #fff;
+    color: #2D3748;
+}
+
+button {
+    color: #fff;
+}
+
+input, select {
+    color: #2D3748;
+    background-color: #F7FAFC;
+    padding: 12px;
+    border-radius: 8px;
+}
+
+.text-red-500 {
+    color: #F56565;
+}
+
+.form-radio {
+    width: 1.25rem;
+    height: 1.25rem;
+}
