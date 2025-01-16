@@ -4,7 +4,7 @@ import { SidebarItem } from "./sibebar-item.component";
 export function CustomSideBar(){
     const navigator = useRouter();
     return (
-        <div className="flex flex-col justify-center items-center h-full w-48  bg-cyan-400 gap-7">
+        <div className="flex flex-col justify-center items-center h-full w-24 lg:w-48  bg-cyan-400 gap-7">
             <SidebarItem title="Home" icon="https://clipground.com/images/white-home-icon-transparent-png-6.png" onClick={() => navigator.push("/home-student")} />
             <SidebarItem title="Courses" icon="https://vectorified.com/images/course-icon-18.png" onClick={() => navigator.push("/courses")} />
             <SidebarItem title="Livestreams" icon="https://cdn3.iconfinder.com/data/icons/social-media-2590/68/117-512.png" onClick={() => navigator.push("/conference-creation")} />

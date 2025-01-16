@@ -1,28 +1,23 @@
+import { CourseDTO } from "@/models/course.dto";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-export interface Course {
-    id: number;
-    title: string;
-    description: string;
-    rating: number;
-    price: string;
-    image: string;
-}
 
 interface CourseCardProps {
-    course: Course;
-    addToCart: (course: Course) => void;
-    openModal: (course: Course) => void;
+    course: CourseDTO;
+    openModal: (course: CourseDTO) => void;
 }
 
-const CourseCard: React.FC<CourseCardProps> = ({ course, addToCart, openModal }) => {
+const CourseCard: React.FC<CourseCardProps> = ({ course, openModal }) => {
+    const navigator = useRouter();
     return (
         <div
             className="bg-white rounded-lg shadow-lg hover:shadow-xl transition-transform transform hover:-translate-y-2 p-5 cursor-pointer"
-            onClick={() => openModal(course)}
-        >
-            <img
-                src={course.image}
+            onClick={() => openModal(course)}>
+            <Image 
+            width={300}  height={200}
+                src={course.banner}
                 alt={course.title}
                 className="w-full h-40 object-cover rounded-md transition-transform duration-300 ease-in-out transform hover:scale-105"
             />
@@ -34,15 +29,14 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, addToCart, openModal })
             </div>
             <button
                 className="bg-cyan-500 hover:bg-cyan-600 text-white w-full py-2 mt-4 rounded-md transition transform hover:scale-105"
-                onClick={(e) => {
-                    e.stopPropagation();
-                    addToCart(course);
-                }}
+                onClick={() => navigator.push(`/course-info?id=${course.id}`)}
             >
-                Añadir al Carrito
+                Ver información
             </button>
         </div>
     );
 };
 
 export default CourseCard;
+
+

@@ -25,3 +25,21 @@ body {
   margin: 0;
   box-sizing: border-box;
 }
+
+
+
+.p-rating {
+  gap: 0.5rem; 
+}
+
+/* styles.css */
+.p-rating-star {
+  color: yellow; /* Cambia el color a amarillo */
+}
+
+.p-rating-star.p-rating-star-on {
+  color: yellow; /* Asegúrate de que las estrellas activas también sean amarillas */
+}
+
+
+

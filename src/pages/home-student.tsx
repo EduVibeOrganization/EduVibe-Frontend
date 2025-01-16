@@ -1,14 +1,29 @@
-import React from "react";
+
 import { Carousel } from "primereact/carousel";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
 import { CustomSideBar } from "@/components/custom-sidebar.component";
 import { Footer } from "@/components/custom-footer.component";
 import { CustomNavBar } from "@/components/custom-navbar.component";
+import { useEffect, useState } from "react";
+import { CategoryService } from "@/services/ category.service";
 
 function HomeStudent() {
   const router = useRouter();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [categoryService] = useState(new CategoryService());
+  const [categories,setCategories] = useState([]);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const token = sessionStorage.getItem("token");
+      setIsAuthenticated(token !== null);
+    }
+    categoryService.getCategories().then((response: any) => {
+      setCategories(response.data);
+    });
+  }, []);
   const features = [
     {
       title: "Aprendizaje Eficiente",
@@ -89,10 +104,10 @@ function HomeStudent() {
   );
 
   return (
-    <div className="bg-white flex h-screen bg-gray-100">
+    <div className="flex h-screen bg-gray-100">
       <CustomSideBar />
       <div className="flex-1 overflow-y-auto">
-      <CustomNavBar />
+      <CustomNavBar categories={categories} isAuthenticated={isAuthenticated} />
         <div className="bg-[#23A8E1] text-white p-16 lg:p-24 relative overflow-hidden">
           <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center">
             <div className="max-w-xl z-10 lg:ml-0 lg:mr-8 mb-8 lg:mb-0">
