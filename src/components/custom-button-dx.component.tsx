@@ -9,7 +9,7 @@ interface ICustomButtonDX {
     onSubmit: () => void;
 }
 
-export function CustomButtonDX ({title, size = 'medium', color = 'cyan-500', icon, iconPosition = 'left', onSubmit} : ICustomButtonDX ) {
+export function CustomButtonDX ({title, size = 'medium', color = '#06b6d4', icon, iconPosition = 'left', onSubmit} : ICustomButtonDX ) {
     const sizeClasses = {
         small: 'p-2 text-sm w-32',
         medium: 'p-3 text-base w-48',
@@ -22,7 +22,8 @@ export function CustomButtonDX ({title, size = 'medium', color = 'cyan-500', ico
             label={title}
             icon={icon}
             iconPos={iconPosition}
-            className={`bg-${color} text-white font-bold rounded-xl ${sizeClasses[size]}`}
+            className={`text-white font-bold rounded-xl ${sizeClasses[size]}`}
+            style={{background: `${color}`}}
             onClick={onSubmit}
             outlined
             raised
