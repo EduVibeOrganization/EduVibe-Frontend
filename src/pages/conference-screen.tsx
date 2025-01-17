@@ -1,13 +1,15 @@
 import { useEffect, useState } from 'react';
-import { DailyProvider, useCallObject, DailyVideo } from '@daily-co/daily-react';
+import { useScreenShare, DailyProvider, useCallObject, DailyVideo, useLocalSessionId } from '@daily-co/daily-react';
 import { ConferenceService } from '@/services/conference.service';
 import { useSearchParams } from 'next/navigation';
 import { CustomButtonDX } from '@/components/custom-button-dx.component';
 
 import "../app/assets/styles/public.css";
 import "../app/assets/styles/conference-screen.css";
+import router from 'next/router';
 
 function ConferenceScreen() {
+    const localSessionId = useLocalSessionId();
     const searchParams = useSearchParams();
     const callObject = useCallObject({});
     const [participants, setParticipants] = useState<string[]>([]);
@@ -17,7 +19,7 @@ function ConferenceScreen() {
     const [isMicOn, setIsMicOn] = useState<boolean>(true);
     const [isScreenSharing, setIsScreenSharing] = useState<boolean>(false);
     const conferenceService = new ConferenceService();
-
+    const [screenShareId, setScreenShareId] = useState<string | null>(null);
     useEffect(() => {
         const room = searchParams?.get('room');
         if (room) {
@@ -52,8 +54,21 @@ function ConferenceScreen() {
 
     const toggleScreenShare = () => {
         if (!callObject) return;
-        (isScreenSharing)? callObject.stopScreenShare() : callObject.startScreenShare();
-        setIsScreenSharing((prev) => !prev);
+        if(isScreenSharing){
+            setScreenShareId(null);
+            callObject.stopScreenShare(); 
+        } else {
+            setScreenShareId(localSessionId);
+            callObject.startScreenShare();
+        }
+    };
+
+    const leaveRoom = () => {
+        if (callObject) {
+            callObject.leave();
+            callObject.destroy();
+        }
+        router.push('/sign-in');
     };
 
     useEffect(() => {
@@ -64,6 +79,24 @@ function ConferenceScreen() {
             callObject.on('participant-joined', fetchParticipants);
             callObject.on('participant-updated', fetchParticipants);
             callObject.on('participant-left', fetchParticipants);
+
+            callObject.on('participant-updated', () => {
+                const state = useScreenShare();
+                setScreenShareId(state.screens[0]?.session_id);
+                fetchParticipants();
+            });
+
+            callObject.on('local-screen-share-started', () => {
+                setScreenShareId(localSessionId);
+                setIsScreenSharing(true);
+                alert('Compartiendo pantalla');
+            });
+
+            callObject.on('local-screen-share-stopped', () => {
+                setScreenShareId(null);
+                setIsScreenSharing(false);
+                alert('Dejó de compartir pantalla');
+            });
         }
 
         return () => {
@@ -99,6 +132,21 @@ function ConferenceScreen() {
                                     automirror
                                 />
                             ))}
+                            { screenShareId != null && isScreenSharing && (
+                                <DailyVideo
+                                    key={screenShareId}
+                                    sessionId={screenShareId}
+                                    type="screenVideo"
+                                    style={{
+                                        width: '640px',
+                                        height: '360px',
+                                        margin: '10px',
+                                        borderRadius: '10px',
+                                        border: '2px solid #f97316',
+                                        backgroundColor: '#000'
+                                    }}
+                                />
+                            )}
                         </div>
                     </DailyProvider>
                 </div>
@@ -126,6 +174,14 @@ function ConferenceScreen() {
                         color={isScreenSharing ? '#f97316' : '#06b6d4'}
                         size='small'
                         onSubmit={toggleScreenShare}
+                    />
+                    <CustomButtonDX 
+                        title={'Salir'}
+                        icon='pi pi-sign-out'
+                        iconPosition='right'
+                        color={'red'}
+                        size='small'
+                        onSubmit={leaveRoom}
                     />
                 </div>
             </div>
