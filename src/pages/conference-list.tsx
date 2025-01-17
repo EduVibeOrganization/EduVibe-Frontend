@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { OrderList } from 'primereact/orderlist';
 import { FaLock } from 'react-icons/fa';
 import { TfiWorld } from "react-icons/tfi";
@@ -16,7 +15,6 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 function ConferenceList() {
-    const router = useRouter();
     const [rooms, setRooms] = useState<RoomResponseDTO[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedRoom, setSelectedRoom] = useState<RoomResponseDTO | null>(null);
