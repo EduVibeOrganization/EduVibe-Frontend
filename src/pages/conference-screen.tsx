@@ -2,6 +2,10 @@ import { useEffect, useState } from 'react';
 import { DailyProvider, useCallObject, DailyVideo } from '@daily-co/daily-react';
 import { ConferenceService } from '@/services/conference.service';
 import { useSearchParams } from 'next/navigation';
+import { CustomButtonDX } from '@/components/custom-button-dx.component';
+
+import "../app/assets/styles/public.css";
+import "../app/assets/styles/conference-screen.css";
 
 function ConferenceScreen() {
     const searchParams = useSearchParams();
@@ -9,6 +13,8 @@ function ConferenceScreen() {
     const [participants, setParticipants] = useState<string[]>([]);
     const [totalCount, setTotalCount] = useState<number>(0);
     const [roomName, setRoomName] = useState<string | null>(null);
+    const [isCameraOn, setIsCameraOn] = useState<boolean>(true);
+    const [isMicOn, setIsMicOn] = useState<boolean>(true);
     const conferenceService = new ConferenceService();
 
     useEffect(() => {
@@ -26,6 +32,20 @@ function ConferenceScreen() {
             setParticipants(response.users.map((user) => user.id));
         } else {
             setTotalCount(0);
+        }
+    };
+
+    const toggleCamera = () => {
+        if (callObject) {
+            callObject.setLocalVideo(!isCameraOn);
+            setIsCameraOn((prev) => !prev);
+        }
+    };
+
+    const toggleMic = () => {
+        if (callObject) {
+            callObject.setLocalAudio(!isMicOn);
+            setIsMicOn((prev) => !prev);
         }
     };
 
@@ -48,27 +68,52 @@ function ConferenceScreen() {
     }, [callObject, roomName]);
 
     return (
-        <div>
-            <h1>{totalCount}</h1>
-            <DailyProvider callObject={callObject}>
-                <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                    {participants.map((id: string) => (
-                        <DailyVideo
-                            key={id}
-                            sessionId={id}
-                            type="video"
-                            style={{
-                                width: '300px',
-                                height: '200px',
-                                margin: '10px',
-                                borderRadius: '10px',
-                                backgroundColor: '#000'
-                            }}
-                            automirror
-                        />
-                    ))}
+        <div className='content-background'>
+            <div className='content'>
+                <div className='content-header'>
+                <img src="/images/logo2.png" alt="Handin Logo" className="h-8 w-auto"/>
+                    <h1>Participantes en la sala: {totalCount}</h1>
                 </div>
-            </DailyProvider>
+                <div className='content-screen'>
+                    <DailyProvider callObject={callObject}>
+                        <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+                            {participants.map((id: string) => (
+                                <DailyVideo
+                                    key={id}
+                                    sessionId={id}
+                                    type="video"
+                                    style={{
+                                        width: '300px',
+                                        height: '200px',
+                                        margin: '10px',
+                                        borderRadius: '10px',
+                                        backgroundColor: '#000'
+                                    }}
+                                    automirror
+                                />
+                            ))}
+                        </div>
+                    </DailyProvider>
+                </div>
+                <div className='content-footer'>
+                    <CustomButtonDX 
+                        title={isCameraOn ? 'Apagar la Cámara' : 'Encender la Cámara'}
+                        icon='pi pi-video'
+                        iconPosition='top'
+                        color={isCameraOn ? '#06b6d4' : "#929292"}
+                        size='small'
+                        onSubmit={toggleCamera}
+                    />
+                    <CustomButtonDX 
+                        title={isMicOn ? 'Apagar el Micrófono' : 'Encender el Micrófono'}
+                        icon='pi pi-microphone'
+                        iconPosition='top'
+                        color={isMicOn ? '#06b6d4' : "#929292"}
+                        size='small'
+                        onSubmit={toggleMic}
+                    />
+                </div>
+            </div>
         </div>
     );
 }
