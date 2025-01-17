@@ -57,7 +57,7 @@ function ConferenceList() {
                         color='#4c33ff'
                         onSubmit={(e: any) => {
                             e.stopPropagation();
-                            router.push(`/conference-screen?room=${room.room_name}`);
+                            window.open(`/conference-screen?room=${room.room_name}`, '_blank', 'noopener,noreferrer');
                         }}
                     />
                     <CustomButtonDX 
@@ -67,7 +67,7 @@ function ConferenceList() {
                         iconPosition="right"
                         onSubmit={(e: any) => {
                             e.stopPropagation();
-                            router.push(room.url);
+                            window.open(room.url, '_blank', 'noopener,noreferrer');
                         }}
                     />
                 </div>
