@@ -15,6 +15,7 @@ function ConferenceScreen() {
     const [roomName, setRoomName] = useState<string | null>(null);
     const [isCameraOn, setIsCameraOn] = useState<boolean>(true);
     const [isMicOn, setIsMicOn] = useState<boolean>(true);
+    const [isScreenSharing, setIsScreenSharing] = useState<boolean>(false);
     const conferenceService = new ConferenceService();
 
     useEffect(() => {
@@ -47,6 +48,12 @@ function ConferenceScreen() {
             callObject.setLocalAudio(!isMicOn);
             setIsMicOn((prev) => !prev);
         }
+    };
+
+    const toggleScreenShare = () => {
+        if (!callObject) return;
+        (isScreenSharing)? callObject.stopScreenShare() : callObject.startScreenShare();
+        setIsScreenSharing((prev) => !prev);
     };
 
     useEffect(() => {
@@ -111,6 +118,14 @@ function ConferenceScreen() {
                         color={isMicOn ? '#06b6d4' : "#929292"}
                         size='small'
                         onSubmit={toggleMic}
+                    />
+                    <CustomButtonDX 
+                        title={isScreenSharing ? 'Detener Compartir Pantalla' : 'Compartir Pantalla'}
+                        icon='pi pi-desktop'
+                        iconPosition='top'
+                        color={isScreenSharing ? '#f97316' : '#06b6d4'}
+                        size='small'
+                        onSubmit={toggleScreenShare}
                     />
                 </div>
             </div>
