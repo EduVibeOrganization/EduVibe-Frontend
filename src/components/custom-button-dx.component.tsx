@@ -5,7 +5,7 @@ interface ICustomButtonDX {
     size?: 'small' | 'medium' | 'large' | 'full';
     color?: string;
     icon?: string;
-    iconPosition?: 'left' | 'right';
+    iconPosition?: 'left' | 'right' | 'top' | 'bottom';
     onSubmit: (e?:any) => void;
 }
 

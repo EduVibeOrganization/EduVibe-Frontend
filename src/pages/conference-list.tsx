@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useRouter } from 'next/router';
 import { OrderList } from 'primereact/orderlist';
 import { FaLock } from 'react-icons/fa';
 import { TfiWorld } from "react-icons/tfi";
@@ -16,7 +15,6 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 
 function ConferenceList() {
-    const router = useRouter();
     const [rooms, setRooms] = useState<RoomResponseDTO[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [selectedRoom, setSelectedRoom] = useState<RoomResponseDTO | null>(null);
@@ -50,24 +48,13 @@ function ConferenceList() {
                 </div>
                 <div>
                     <CustomButtonDX
-                        title="Unirse desde Handin"
+                        title="Unirse"
                         size='small'
                         icon="pi pi-sign-in"
                         iconPosition="right"
-                        color='#4c33ff'
                         onSubmit={(e: any) => {
                             e.stopPropagation();
-                            router.push(`/conference-screen?room=${room.room_name}`);
-                        }}
-                    />
-                    <CustomButtonDX 
-                        title="Abrir en Daily.co" 
-                        size="small"
-                        icon="pi pi-sign-in"
-                        iconPosition="right"
-                        onSubmit={(e: any) => {
-                            e.stopPropagation();
-                            router.push(room.url);
+                            window.open(`/conference-screen-simplified?room=${room.room_name}`, '_blank', 'noopener,noreferrer');
                         }}
                     />
                 </div>
