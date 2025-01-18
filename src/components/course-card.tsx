@@ -38,5 +38,3 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, openModal }) => {
 };
 
 export default CourseCard;
-
-

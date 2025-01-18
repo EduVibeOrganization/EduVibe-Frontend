@@ -64,3 +64,4 @@ const Modal: React.FC<ModalProps> = ({ isOpen, course, onClose, addToCart }) => 
 };
 
 export default Modal;
+
