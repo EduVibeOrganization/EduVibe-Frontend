@@ -38,7 +38,7 @@ const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
                                 >
                                     <div className="flex items-center space-x-4">
                                         <img
-                                            src={course.banner} // Asegúrate de que esta propiedad sea correcta
+                                            src={course.banner}
                                             alt={course.title}
                                             className="w-20 h-20 object-cover rounded-md"
                                         />
