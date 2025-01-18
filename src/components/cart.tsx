@@ -73,4 +73,3 @@ const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
 };
 
 export default Cart;
-
