@@ -1,25 +1,28 @@
-import { useRouter } from "next/router";
-import { SidebarItem } from "./sibebar-item.component";
-
+import { useRouter } from "next/navigation";
 import "../app/assets/styles/sidebar.css";
 import "../app/assets/styles/public.css";
 import { SidebarItem2 } from "./custom-sidebar-item-2";
 
-export function CustomSidebarAdmin(){
+interface ICustomSidebarDX {
+    mainBackgroundColor?: string;
+    headerBackgroundColor?: string;
+    headerTextColor?: string;
+    headerIconColor?: string;
+    sidebarItems: React.ReactNode;
+}
+
+export function CustomSidebarDX({mainBackgroundColor, headerBackgroundColor, headerTextColor, headerIconColor, sidebarItems}: ICustomSidebarDX){
     const router = useRouter();
     return (
-        <div className="sidebar">
-            <SidebarItem2 icon={"pi pi-shield"} title={"Autenticación y Autorización"} onClick={() => router.push("/admin-authorization")}/>
-            <SidebarItem2 icon={"pi pi-shopping-cart"} title={"Compras"} onClick={() => router.push("/admin-shopping")}/>    
-            <SidebarItem2 icon={"pi pi-at"} title={"Contacto"} onClick={() => router.push("/admin-contact")}/>    
-            <SidebarItem2 icon={"pi pi-users"} title={"Cuentas"} onClick={() => router.push("/admin-account")}/>    
-            <SidebarItem2 icon={"pi pi-share-alt"} title={"Cuentas Sociales"} onClick={() => router.push("/admin-social-account")}/>    
-            <SidebarItem2 icon={"pi pi-book"} title={"Libro de Reclamaciones"} onClick={() => router.push("/admin-complains-book")}/>    
-            <SidebarItem2 icon={"pi pi-unlock"} title={"Política de Privacidad"} onClick={() => router.push("/admin-privacy-policy")}/>    
-            <SidebarItem2 icon={"pi pi-question-circle"} title={"Preguntas Frecuentes"} onClick={() => router.push("/admin-qa")}/>
-            <SidebarItem2 icon={"pi pi-desktop"} title={"Sitios"} onClick={() => router.push("/admin-sites")}/>
-            <SidebarItem2 icon={"pi pi-info-circle"} title={"Términos y condiciones"} onClick={() => router.push("/admin-terms-conditions")}/>
-            <SidebarItem2 icon={"pi pi-user"} title={"Usuario"} onClick={() => router.push("/admin-user")}/>
+        <div className="sidebar" style={{backgroundColor: mainBackgroundColor}}>
+            <header className="sidebar-header" style={{backgroundColor: headerBackgroundColor}}>
+                <i className="pi pi-database logo-icon" style={{color: headerIconColor, fontSize: "2rem"}}/>
+                <h1 style={{color: headerTextColor}}>HANDIN</h1>
+            </header>
+            <div className="sidebar-content">
+                {sidebarItems}
+                <SidebarItem2 icon={"pi pi-sign-out"} title={"Salir"} onClick={() => router.push("/sign-in")} textColor="#C2C7D0" backgroundAccentColor="#da0000" textAccentColor="white"/>
+            </div>
         </div>
     )
 }

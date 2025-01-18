@@ -1,11 +1,18 @@
-import { CustomSidebarAdmin } from "@/components/custom-sidebar-admin.component";
+import { CustomSidebarDX } from "@/components/custom-sidebar-admin.component";
 import "../app/assets/styles/public.css";
+import { SidebarItemsAdmin } from "@/components/sidebar-items-admin.component";
 
 function AdminContact(){
     return (
         <div className="content-background">
             <div className="content-container">
-                <CustomSidebarAdmin />
+                <CustomSidebarDX
+                    sidebarItems={<SidebarItemsAdmin/>}
+                    mainBackgroundColor="#343A40"
+                    headerBackgroundColor="#23272B"
+                    headerTextColor="white"
+                    headerIconColor="#007BFF"
+                />
                 <div>
                     <h1>Admin Authorization</h1>
                 </div>
