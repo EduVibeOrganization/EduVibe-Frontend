@@ -1,8 +1,8 @@
-import type { NextConfig } from "next";
+import { NextConfig } from "next";
 
-const nextConfig: NextConfig = {
+const nextConfig : NextConfig = {
     images: {
-        domains: ["res.cloudinary.com", "cdn.eduonix.com"],
+        domains: ["res.cloudinary.com", "cdn.eduonix.com","tse1.mm.bing.net"],
     },
     reactStrictMode: true,
     async redirects() {
