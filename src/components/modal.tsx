@@ -1,13 +1,13 @@
 import React from "react";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { Course } from "./course-card";
+import { CourseDTO } from "@/models/course.dto";
 
 interface ModalProps {
     isOpen: boolean;
-    course: Course;
+    course: CourseDTO;
     onClose: () => void;
-    addToCart: (course: Course) => void;
+    addToCart: (course: CourseDTO) => void;
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, course, onClose, addToCart }) => {
@@ -38,7 +38,7 @@ const Modal: React.FC<ModalProps> = ({ isOpen, course, onClose, addToCart }) => 
                 </div>
 
                 <img
-                    src={course.image}
+                    src={course.banner} // Propiedad ajustada según CourseDTO
                     alt={course.title}
                     className="w-full h-56 object-cover rounded-md mt-4 transition-transform duration-500 ease-in-out transform hover:scale-105"
                 />

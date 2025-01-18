@@ -1,8 +1,8 @@
 import React from "react";
-import { Course } from "./course-card";
+import { CourseDTO } from "@/models/course.dto";
 
 interface CartProps {
-    cart: Course[];
+    cart: CourseDTO[];
     onRemoveFromCart: (id: number) => void;
     onClose: () => void;
 }
@@ -38,7 +38,7 @@ const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
                                 >
                                     <div className="flex items-center space-x-4">
                                         <img
-                                            src={course.image}
+                                            src={course.banner} // Asegúrate de que esta propiedad sea correcta
                                             alt={course.title}
                                             className="w-20 h-20 object-cover rounded-md"
                                         />
@@ -60,8 +60,7 @@ const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
                         <div className="mt-6 flex justify-between items-center border-t pt-4">
                             <span className="font-semibold text-gray-800 text-lg">
                                 Total: $
-                                {cart.reduce((total, course) => total + parseFloat(course.price), 0).toFixed(2)}
-                            </span>
+                                {cart.reduce((total, course) => total + course.price, 0).toFixed(2)}                            </span>
                             <button className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
                                 Proceder al Pago
                             </button>
