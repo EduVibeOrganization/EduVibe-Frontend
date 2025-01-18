@@ -14,7 +14,7 @@ import { SectionService } from "@/services/section.service";
 
 
 function CourseInfo(){
-    const [course, setCourse] = useState(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1), 0.5,"Hola", "Hola",0,"",0,0));
+    const [course, setCourse] = useState(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1),"Hola", "Hola",0,"",0,0));
     const [goals, setGoals] = useState(new Array<CourseItemDTO>());
     const [sections, setSections] = useState(new Array<CourseItemDTO>());
 
@@ -26,7 +26,7 @@ function CourseInfo(){
         const courseId = new URLSearchParams(window.location.search).get("id");
         try{
             courseService.getCourseById(Number(courseId)).then((response) => {
-                const courseData = new CourseDTO(response.data.title, response.data.rating, new Date(response.data.start_date), new Date(response.data.end_date), response.data.progress_rate, response.data.subtitle, response.data.description, response.data.hours, response.data.banner, response.data.price, response.data.id);
+                const courseData = new CourseDTO(response.data.title, response.data.rating, new Date(response.data.start_date), new Date(response.data.end_date), response.data.subtitle, response.data.description, response.data.hours, response.data.banner, response.data.price, response.data.id);
                 setCourse(courseData);
             }).then(() => {
                 goalService.getGoalsByCourseId(Number(courseId)).then((response) => {
@@ -34,7 +34,7 @@ function CourseInfo(){
                 });
             });
         } catch(_){
-            setCourse(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1), 0.5,"Hola", "Hola", 0, "", 0, 0));
+            setCourse(new CourseDTO("React", 4.5, new Date(2021, 1, 1), new Date(2021, 2, 1),"Hola", "Hola", 0, "", 0, 0));
         }
 
         try{
@@ -48,17 +48,19 @@ function CourseInfo(){
 
     },[]);
     return (
-        <div className="page-size flex">
+        <div className="page-size flex bg-cover bg-center " style={{
+            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${course.banner})`,
+          }}>
              <div className="hidden lg:block">
                <CustomSideBar/>
              </div>
             <section className="mt-14 ml-10 w-full ">
                 <h1 className="font-semibold bg-blue-300 w-fit p-2 rounded-xl text-xl lg:text-3xl"> {course.title.charAt(0).toUpperCase() + course.title.slice(1)}</h1>
                 <div className="flex justify-evenly mt-12">
-                    <div className="flex flex-col gap-8">
-                         <h4 className="font-semibold bg-blue-300 w-fit p-2 rounded-xl text-xl lg:text-3xl"> {course.subtitle}</h4>
+                    <div className="flex flex-col gap-8 text-white">
+                         <h4 className="font-semibold bg-blue-300 w-fit p-2 rounded-xl text-xl lg:text-3xl text-black"> {course.subtitle}</h4>
                          <p className="text-sm lg:text-base"> {course.description}</p>
-                           <p className="text-sm lg:text-base"> ¿Qué aprenderás? </p>
+                           <p className="text-sm lg:text-base  "> ¿Qué aprenderás? </p>
                            <div className="flex flex-col gap-2 ml-4 text-sm lg:text-base">
                             {
                                 goals.map((goal) => {
@@ -91,7 +93,6 @@ function CourseInfo(){
                               </div>
                            </div>
                     </div>
-                    <Image width={450} height={50} src={course.banner} alt={course.title} className=" hidden lg:block"/>
                 </div>
             </section>
            </div>
