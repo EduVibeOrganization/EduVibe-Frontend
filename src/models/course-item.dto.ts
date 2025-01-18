@@ -2,13 +2,15 @@ export class CourseItemDTO{
     id: number;
     title: string;
     banner?: string;
-    video?: string;
+    fileUrl?: string;
     description?: string;
-    constructor(id:number,title:string, banner:string, video:string, description:string){
+    courses_id: number;
+    constructor(id:number,title:string, banner:string, fileUrl:string, description:string, courses_id:number){
         this.id = id;
         this.title = title;
         this.banner = banner;
-        this.video = video;
+        this.fileUrl= fileUrl;
         this.description = description;
+        this.courses_id = courses_id;
     }
 }

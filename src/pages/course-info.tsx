@@ -11,6 +11,7 @@ import { GoalService } from "@/services/goal.service";
 import Image from "next/image";
 import { SectionCard } from "@/components/section-card.component";
 import { SectionService } from "@/services/section.service";
+import { useRouter } from "next/navigation";
 
 
 function CourseInfo(){
@@ -21,6 +22,7 @@ function CourseInfo(){
     const [courseService] = useState(new CourseService());
     const [goalService] = useState(new GoalService());
     const [sectionService] = useState(new SectionService());
+    const navigator = useRouter();
 
     useEffect(() => {
         const courseId = new URLSearchParams(window.location.search).get("id");
@@ -47,6 +49,7 @@ function CourseInfo(){
 
 
     },[]);
+
     return (
         <div className="page-size flex bg-cover bg-center " style={{
             backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${course.banner})`,
@@ -86,8 +89,8 @@ function CourseInfo(){
                             <div className="mt-8 flex flex-col gap-5">
                                {
                                 sections.map((section) => {
-                                    return <SectionCard section={section}/>
-                                }
+                                    return <SectionCard section={section}  />
+                                 }
                                 )
                               }
                               </div>
