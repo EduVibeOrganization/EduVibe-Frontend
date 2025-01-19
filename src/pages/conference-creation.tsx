@@ -10,7 +10,7 @@ import { CustomInputSwitch } from "@/components/custom-input-switch.component";
 import { CustomRow } from "@/components/custom-row.component";
 import { ConferenceService } from "@/services/conference.service";
 import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
-import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
+import { SidebarItemsTeacher } from "@/components/sidebar-items-teacher.component";
 
 function ConferenceCreation(){
     const router = useRouter();
@@ -53,9 +53,9 @@ function ConferenceCreation(){
         <div className="content-background">
             <div className="content-container">
                 <CustomSidebarDX
-                    sidebarItems={<SidebarItemsStudent />}
-                    mainBackgroundColor="#25A0D2"
-                    headerBackgroundColor="#0D556E"
+                    sidebarItems={<SidebarItemsTeacher />}
+                    mainBackgroundColor="#0D556E"
+                    headerBackgroundColor="#062f3e"
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />

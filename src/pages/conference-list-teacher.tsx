@@ -14,6 +14,7 @@ import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { CustomSidebarDX } from '@/components/custom-sidebar-dx.component';
 import { SidebarItemsTeacher } from '@/components/sidebar-items-teacher.component';
+import { useRouter } from 'next/navigation';
 
 function ConferenceListTeacher() {
     const [rooms, setRooms] = useState<RoomResponseDTO[]>([]);
@@ -21,6 +22,7 @@ function ConferenceListTeacher() {
     const [selectedRoom, setSelectedRoom] = useState<RoomResponseDTO | null>(null);
     const [dialogVisible, setDialogVisible] = useState<boolean>(false);
     const conferenceService = new ConferenceService();
+    const router = useRouter();
 
     const getAllRooms = async () => {
         try {
@@ -89,6 +91,17 @@ function ConferenceListTeacher() {
                             />
                         </div>
                     )}
+                    <div className='m-3'>
+                        <CustomButtonDX
+                            title="Crear Sala"
+                            size='medium'
+                            icon="pi pi-plus"
+                            iconPosition="right"
+                            onSubmit={(e: any) => {
+                                router.push('/conference-creation');
+                            }}
+                        />
+                    </div>
                 </div>
                 <EditRoomDialog
                     visible={dialogVisible}
