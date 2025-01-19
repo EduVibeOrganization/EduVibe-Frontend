@@ -16,6 +16,7 @@ export function SidebarItemsStudent(){
             <SidebarItem2 icon={"pi pi-question-circle"} title={"Centro de Ayuda"} textColor={textColor} backgroundAccentColor={backgroundAccentColor} textAccentColor={textAccentColor} onClick={() => router.push("/help-center-student")}/>    
             <SidebarItem2 icon={"pi pi-user"} title={"Perfil"} textColor={textColor} backgroundAccentColor={backgroundAccentColor} textAccentColor={textAccentColor} onClick={() => router.push("/my-profile")}/>
             <SidebarItem2 icon={"pi pi-cog"} title={"Administración"} textColor={textColor} backgroundAccentColor={backgroundAccentColor} textAccentColor={textAccentColor} onClick={() => router.push("/admin-authorization")}/>    
+            <SidebarItem2 icon={"pi pi-graduation-cap"} title={"Profesor"} textColor={textColor} backgroundAccentColor={backgroundAccentColor} textAccentColor={textAccentColor} onClick={() => router.push("/courses-teacher")}/>    
         </div>
     );
 }
