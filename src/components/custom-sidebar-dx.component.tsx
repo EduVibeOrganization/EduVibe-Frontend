@@ -21,7 +21,7 @@ export function CustomSidebarDX({mainBackgroundColor, headerBackgroundColor, hea
             </header>
             <div className="sidebar-content">
                 {sidebarItems}
-                <SidebarItem2 icon={"pi pi-sign-out"} title={"Salir"} onClick={() => router.push("/sign-in")} textColor="#C2C7D0" backgroundAccentColor="#da0000" textAccentColor="white"/>
+                <SidebarItem2 icon={"pi pi-sign-out"} title={"Salir"} onClick={() => router.push("/sign-in")} textColor="white" backgroundAccentColor="#da0000" textAccentColor="white"/>
             </div>
         </div>
     )

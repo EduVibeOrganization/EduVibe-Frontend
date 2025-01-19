@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { OrderList } from 'primereact/orderlist';
 import { FaLock } from 'react-icons/fa';
 import { TfiWorld } from "react-icons/tfi";
-import { CustomSideBar } from '@/components/custom-sidebar.component';
 import { ConferenceService } from '@/services/conference.service';
 import { RoomResponseDTO } from '@/models/room-response.dto';
 import { CustomButtonDX } from '@/components/custom-button-dx.component';
@@ -13,6 +12,8 @@ import "../app/assets/styles/public.css";
 import "primereact/resources/primereact.css";
 import "primeicons/primeicons.css";
 import "primereact/resources/themes/lara-light-cyan/theme.css";
+import { CustomSidebarDX } from '@/components/custom-sidebar-dx.component';
+import { SidebarItemsStudent } from '@/components/sidebar-items-student.component';
 
 function ConferenceList() {
     const [rooms, setRooms] = useState<RoomResponseDTO[]>([]);
@@ -65,7 +66,13 @@ function ConferenceList() {
     return (
         <div className="content-background">
             <div className="content-container">
-                <CustomSideBar />
+                <CustomSidebarDX
+                    sidebarItems={<SidebarItemsStudent />}
+                    mainBackgroundColor="#25A0D2"
+                    headerBackgroundColor="#0D556E"
+                    headerTextColor="white"
+                    headerIconColor="#007BFF"
+                />
                 <div className="list-container">
                     <h1 className="title">Lista de Conferencias</h1>
                     {loading ? (<p>Cargando salas...</p>) : rooms.length === 0 ? (<p>No hay salas disponibles.</p>) : (

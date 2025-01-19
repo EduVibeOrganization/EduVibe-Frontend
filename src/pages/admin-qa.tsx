@@ -15,7 +15,7 @@ function AdminQA(){
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />
-                <div className="flex-1 flex flex-col items-center p-6 lg:px-12">
+                <div className="flex-1 flex flex-col items-center p-6 lg:px-12 overflow-y-auto">
                 <header className="w-full max-w-4xl text-center mb-12">
                     <h1 className="text-4xl font-bold text-gray-800 mb-3">Centro de Ayuda para Estudiantes</h1>
                     <p className="text-gray-600 mb-6">Tu lugar para soporte, preguntas frecuentes y más recursos.</p>

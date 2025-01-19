@@ -1,5 +1,6 @@
 .admin-shopping-content {
     width: 100%;
+    overflow-y: auto;
 }
 
 /* Títulos y textos */
@@ -75,12 +76,8 @@ p.warning-text {
     border-radius: 0.5rem;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 1.5rem;
-    /*Scroll*/
-    position: relative;
-    overflow-y: auto;
     top: 0;
     bottom: 0;
-    max-height: 48%;
 }
 
 .courses-list {
