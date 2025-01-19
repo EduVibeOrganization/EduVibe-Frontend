@@ -1,24 +1,21 @@
-import React from "react";
-import Link from "next/link";
+import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { CustomSideBar } from "@/components/custom-sidebar.component";
-import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
-import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
+import { SidebarItemsAdmin } from "@/components/sidebar-items-admin.component";
+import Link from "next/link";
 
-function HelpCenterStudent() {
+function AdminQA(){
     return (
         <div className="content-background">
             <div className="content-container">
                 <CustomSidebarDX
-                    sidebarItems={<SidebarItemsStudent />}
-                    mainBackgroundColor="#25A0D2"
-                    headerBackgroundColor="#0D556E"
+                    sidebarItems={<SidebarItemsAdmin/>}
+                    mainBackgroundColor="#343A40"
+                    headerBackgroundColor="#23272B"
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />
-                {/* Main Content */}
-            <div className="flex-1 flex flex-col items-center p-6 lg:px-12 overflow-y-auto">
+                <div className="flex-1 flex flex-col items-center p-6 lg:px-12 overflow-y-auto">
                 <header className="w-full max-w-4xl text-center mb-12">
                     <h1 className="text-4xl font-bold text-gray-800 mb-3">Centro de Ayuda para Estudiantes</h1>
                     <p className="text-gray-600 mb-6">Tu lugar para soporte, preguntas frecuentes y más recursos.</p>
@@ -104,9 +101,8 @@ function HelpCenterStudent() {
                 </footer>
             </div>
             </div>
-            
         </div>
     );
 }
 
-export default HelpCenterStudent;
+export default AdminQA;

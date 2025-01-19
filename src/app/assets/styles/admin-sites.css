@@ -1,0 +1,44 @@
+/* Sites Page Styles */
+.sites-content {
+    padding: 2rem;
+    color: #343a40;
+  }
+  
+  .sites-content h1 {
+    font-size: 2rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+  }
+  
+  .sites-content p {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+    color: #6c757d;
+  }
+  
+  .sites-content ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .sites-content ul li {
+    margin: 0.5rem 0;
+    font-size: 1.2rem;
+  }
+  
+  .sites-content ul li a {
+    text-decoration: none;
+    color: #007bff;
+    display: flex;
+    align-items: center;
+  }
+  
+  .sites-content ul li a i {
+    margin-right: 0.5rem;
+    font-size: 1.5rem;
+  }
+  
+  .sites-content ul li a:hover {
+    color: #0056b3;
+  }
+  

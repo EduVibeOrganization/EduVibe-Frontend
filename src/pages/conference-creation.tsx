@@ -8,8 +8,9 @@ import { CustomSelectorComponent } from "@/components/custom-selector.component"
 import { useState } from "react";
 import { CustomInputSwitch } from "@/components/custom-input-switch.component";
 import { CustomRow } from "@/components/custom-row.component";
-import { CustomSideBar } from "@/components/custom-sidebar.component";
 import { ConferenceService } from "@/services/conference.service";
+import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
+import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
 
 function ConferenceCreation(){
     const router = useRouter();
@@ -51,7 +52,13 @@ function ConferenceCreation(){
     return(
         <div className="content-background">
             <div className="content-container">
-                <CustomSideBar />
+                <CustomSidebarDX
+                    sidebarItems={<SidebarItemsStudent />}
+                    mainBackgroundColor="#25A0D2"
+                    headerBackgroundColor="#0D556E"
+                    headerTextColor="white"
+                    headerIconColor="#007BFF"
+                />
                 <div className="card-container">
                     <div className="card">
                         <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">

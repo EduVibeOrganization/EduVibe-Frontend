@@ -2,7 +2,8 @@ import React from "react";
 import { useRouter } from "next/router";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { CustomSideBar } from "@/components/custom-sidebar.component";
+import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
+import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
 
 function HelpCenter() {
     const router = useRouter();
@@ -16,12 +17,16 @@ function HelpCenter() {
     };
 
     return (
-        <div className="flex min-h-screen bg-gray-50">
-            <div className="hidden lg:block bg-white shadow-md border-none">
-                <CustomSideBar />
-            </div>
-
-            {/* Main Content */}
+        <div className="content-background">
+            <div className="content-container">
+                <CustomSidebarDX
+                    sidebarItems={<SidebarItemsStudent />}
+                    mainBackgroundColor="#25A0D2"
+                    headerBackgroundColor="#0D556E"
+                    headerTextColor="white"
+                    headerIconColor="#007BFF"
+                />
+                {/* Main Content */}
             <div className="flex-1 flex flex-col justify-center items-center p-6">
                 <div className="text-center p-8 max-w-lg bg-white shadow-lg rounded-lg">
                     <h1 className="text-4xl font-bold text-gray-800 mb-6">Bienvenido al Centro de Ayuda</h1>
@@ -43,6 +48,7 @@ function HelpCenter() {
                     </div>
                 </div>
             </div>
+            </div>            
         </div>
     );
 }

@@ -1,0 +1,52 @@
+/* Complaints Book Styles */
+.complaints-content {
+    padding: 2rem;
+    width: 100%;
+  }
+  
+  .complaints-content h1 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: #343a40;
+  }
+  
+  /* Complaints Table */
+  .complaints-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .complaints-table th,
+  .complaints-table td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .complaints-table th {
+    background-color: #343a40;
+    color: white;
+  }
+  
+  .complaints-table tr:hover {
+    background-color: #f8f9fa;
+  }
+  
+  .complaints-table .no-data {
+    text-align: center;
+    color: #6c757d;
+  }
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .complaints-table th,
+    .complaints-table td {
+      padding: 0.5rem;
+    }
+  }
+  
