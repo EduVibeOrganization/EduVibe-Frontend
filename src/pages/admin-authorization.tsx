@@ -68,9 +68,7 @@ function AdminAuthorization() {
                             {profiles.map((user) => (
                                 <li
                                     key={user.username}
-                                    className={`user-item ${
-                                        selectedProfile?.username === user.username ? "selected" : ""
-                                    }`}
+                                    className={`user-item ${ selectedProfile?.username === user.username ? "selected" : ""}`}
                                     onClick={() => setSelectedProfile(user)}
                                 >
                                     {user.username} - <strong>{user.role}</strong>
@@ -81,25 +79,13 @@ function AdminAuthorization() {
                     {selectedProfile && (
                         <div className="user-details">
                             <h3>Detalles del Usuario</h3>
-                            <p>
-                                <strong>Email:</strong> {selectedProfile.email}
-                            </p>
-                            <p>
-                                <strong>Nombre de Usuario:</strong> {selectedProfile.username}
-                            </p>
-                            <p>
-                                <strong>Teléfono:</strong> {selectedProfile.phoneNumber}
-                            </p>
-                            <p>
-                                <strong>Rol:</strong> {selectedProfile.role}
-                            </p>
+                            <p><strong>Email:</strong> {selectedProfile.email} </p>
+                            <p><strong>Nombre de Usuario:</strong> {selectedProfile.username}</p>
+                            <p><strong>Teléfono:</strong> {selectedProfile.phoneNumber}</p>
+                            <p><strong>Rol:</strong> {selectedProfile.role}</p>
                             <button
                                 className="assign-permission-button"
-                                onClick={() =>
-                                    alert(
-                                        `Permisos asignados a ${selectedProfile.username} (${selectedProfile.role})`
-                                    )
-                                }
+                                onClick={() =>alert(`Permisos asignados a ${selectedProfile.username} : (${selectedProfile.role})`)}
                             >
                                 Asignar Permisos
                             </button>
