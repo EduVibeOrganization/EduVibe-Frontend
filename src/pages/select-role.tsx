@@ -37,8 +37,8 @@ function SelectRole(){
                  <div className="flex flex-col justify-center items-center mt-24 lg:mt-32 gap-5 lg:ml-96">
                    <h1 className="text-center text-white font-bold text-3xl lg:text-5xl"> ¿Cómo deseas usar HANDIN?</h1>
                    <div className="flex flex-col lg:flex-row gap-5 mt-20 lg:mt-28">
-                     <RoleCard title="Estudiante" icon="https://cdn0.iconfinder.com/data/icons/education-line-circle-1/614/243_-_Male_Student-512.png" description="Accede a los mejores cursos y ponencias para mejorar tus habilidades." onClick={ () => dispatch(setRoleId(2))}/>
-                     <RoleCard title="Profesor/Ponente" icon="https://cdn.discordapp.com/attachments/1315846437950722109/1326686732455772270/profesor.png?ex=678054cd&is=677f034d&hm=ed3c8b19b52200c5a4596a31f784859a80da7bb8bb9e39937fc37808c942091e&" description="Publica tus cursos o organiza ponencias para compartir tus conocimiento." onClick={ () => dispatch(setRoleId(3))}/>
+                     <RoleCard title="Estudiante" icon="https://cdn-icons-png.freepik.com/512/15972/15972427.png?ga=GA1.1.1654077201.1737321140" description="Accede a los mejores cursos y ponencias para mejorar tus habilidades." onClick={ () => dispatch(setRoleId(2))}/>
+                     <RoleCard title="Profesor/Ponente" icon="https://cdn-icons-png.freepik.com/512/1962/1962687.png?ga=GA1.1.1654077201.1737321140" description="Publica tus cursos o organiza ponencias para compartir tus conocimiento." onClick={ () => dispatch(setRoleId(3))}/>
                    </div>
                    <div className="flex flex-col lg:flex-row gap-3 lg:ml-96">
                         <button className="bg-cyan-700 text-white font-bold text-md  px-5 py-2 rounded-lg mt-5" onClick={() => router.push("/sign-up")}> Regresar </button>
