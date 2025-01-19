@@ -11,6 +11,22 @@ export function middleware(request: NextRequest) {
     if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
         return NextResponse.redirect(new URL('/home-student', request.url));
     }
+    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+        return NextResponse.redirect(new URL('/help-center-student', request.url));
+    }
+    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+        return NextResponse.redirect(new URL('/help-center-teacher', request.url));
+    }
+    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+        return NextResponse.redirect(new URL('/conference-creation', request.url));
+    }
+    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+        return NextResponse.redirect(new URL('conference-left', request.url));
+    }
+    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+        return NextResponse.redirect(new URL('/conference-list', request.url));
+    }
+
 
     return NextResponse.next();
 }
