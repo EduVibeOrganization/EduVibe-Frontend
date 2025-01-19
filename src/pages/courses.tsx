@@ -9,6 +9,7 @@ import { CourseService } from "@/services/course.service";
 import { CourseDTO } from "@/models/course.dto";
 import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
+import { ShoppingCartService } from "@/services/shopping-cart.service";
 
 const Courses: React.FC = () => {
     const [cart, setCart] = useState<CourseDTO[]>([]);
@@ -19,18 +20,25 @@ const Courses: React.FC = () => {
     const [courseService] = useState(new CourseService());
     const [courses, setCourses] = useState<CourseDTO[]>([]);
     const [openCart, setOpenCart] = useState(false);
+    const shoppingCartService = new ShoppingCartService(); // Initialize the shopping cart service
 
+    // Fetch the courses
     useEffect(() => {
-        try{
-            courseService.getCoursesByPage(1, 6).then((response) => {
-                setCourses(response.data);
-            });
-        } catch (_){
+        courseService.getCoursesByPage(1, 6).then((response) => {
+            setCourses(response.data);
+        }).catch(() => {
             setCourses([]);
-        }
+        });
     }, []);
 
-
+    // Fetch the current cart on component mount
+    useEffect(() => {
+        shoppingCartService.getShoppingCart().then((response) => {
+            setCart(response); // Set cart from backend
+        }).catch(() => {
+            setCart([]); // Fallback to empty cart on error
+        });
+    }, []);
 
     const onPageChange = (event: any) => {
         setFirst(event.first);
@@ -39,16 +47,28 @@ const Courses: React.FC = () => {
         });
     };
 
-    const addToCart = (course: CourseDTO) => {
-        setCart([...cart, course]);
-        setAddedCourse(course.id);
-        setTimeout(() => {
-            setAddedCourse(null);
-        }, 2000);
+    const addToCart = async (course: CourseDTO) => {
+        try {
+            const userId = 123; // Replace this with the actual user ID from your context or auth service
+            await shoppingCartService.addCourseToCart(course.id, userId); // Pass userId as well
+            setCart([...cart, course]); // Update frontend cart state
+            setAddedCourse(course.id);
+            setTimeout(() => {
+                setAddedCourse(null);
+            }, 2000);
+        } catch (error) {
+            console.error("Failed to add course to cart", error);
+        }
     };
+    
 
-    const removeFromCart = (id: number) => {
-        setCart(cart.filter((course) => course.id !== id));
+    const removeFromCart = async (id: number) => {
+        try {
+            await shoppingCartService.removeCourseFromCart(id); // Remove course from backend cart
+            setCart(cart.filter((course) => course.id !== id)); // Update frontend cart state
+        } catch (error) {
+            console.error("Failed to remove course from cart", error);
+        }
     };
 
     const openModal = (course: CourseDTO) => {
@@ -64,13 +84,10 @@ const Courses: React.FC = () => {
     const closeCart = () => {
         setOpenCart(false);
     };
+
     const openCartMenu = () => {
         setOpenCart(true);
     };
-
-   
-
-
 
     return (
         <div className="content-background">
@@ -95,31 +112,28 @@ const Courses: React.FC = () => {
                         </button>
                     </div>
 
-                    {
-                    courses.length > 0 ? (
-                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                                {courses.map((course) => (
-                                    <div key={course.id} className="relative">
-                                        <CourseCard course={course}  openModal={openModal} />
-                                        {addedCourse === course.id && (
-                                            <div className="absolute top-0 right-0 bg-green-500 text-white text-sm p-2 rounded-md">
-                                                ¡Curso añadido al carrito!
-                                            </div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        ) : (
-                            <div className="text-white  text-center font-bold text-xl lg:text-3xl p-14 md:p-20 lg:p-28  xl:p-32">
-                                No existen cursos disponibles
-                            </div>
+                    {courses.length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                            {courses.map((course) => (
+                                <div key={course.id} className="relative">
+                                    <CourseCard course={course} openModal={openModal} />
+                                    {addedCourse === course.id && (
+                                        <div className="absolute top-0 right-0 bg-green-500 text-white text-sm p-2 rounded-md">
+                                            ¡Curso añadido al carrito!
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <div className="text-white  text-center font-bold text-xl lg:text-3xl p-14 md:p-20 lg:p-28  xl:p-32">
+                            No existen cursos disponibles
+                        </div>
                     )}
 
-
                     <div className="card mt-10">
-                    <Paginator first={first} rows={courses.length > 6 ? courses.length / 6 : 1} totalRecords={10} onPageChange={onPageChange} template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} />
+                        <Paginator first={first} rows={courses.length > 6 ? courses.length / 6 : 1} totalRecords={10} onPageChange={onPageChange} template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} />
                     </div>
-
                 </div>
 
                 {isModalOpen && selectedCourse && (

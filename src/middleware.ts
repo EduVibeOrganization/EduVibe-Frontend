@@ -35,6 +35,17 @@ export const config = {
         '/courses',
         '/course-info',
         '/course-video',
-        '/teacher-information'
+        '/teacher-information',
+        '/admin-authorization',
+        '/admin-businness',
+        '/admin-complains-book',
+        '/admin-contact',
+        '/admin-event',
+        '/admin-privacy-policy',
+        '/admin-qa',
+        '/admin-shopping',
+        '/admin-sites',
+        '/admin-terms-conditions', 
+
     ],
 };

@@ -2,7 +2,7 @@ import { NextConfig } from "next";
 
 const nextConfig : NextConfig = {
     images: {
-        domains: ["res.cloudinary.com", "cdn.eduonix.com","tse1.mm.bing.net","ceprofesional.com"],
+        domains: ["elordenmundial.com", "cdn.eduonix.com","tse1.mm.bing.net","ceprofesional.com"],
     },
     reactStrictMode: true,
     async redirects() {
