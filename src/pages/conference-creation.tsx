@@ -5,12 +5,14 @@ import "primereact/resources/themes/lara-light-cyan/theme.css";
 import { useRouter } from "next/navigation";
 import { CustomInputText } from "@/components/custom-input-text.component";
 import { CustomSelectorComponent } from "@/components/custom-selector.component";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { CustomInputSwitch } from "@/components/custom-input-switch.component";
 import { CustomRow } from "@/components/custom-row.component";
 import { ConferenceService } from "@/services/conference.service";
 import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import { SidebarItemsTeacher } from "@/components/sidebar-items-teacher.component";
+import { UserService } from "@/services/user.service";
+import Cookies from "js-cookie";
 
 function ConferenceCreation(){
     const router = useRouter();
@@ -22,6 +24,22 @@ function ConferenceCreation(){
     const [prejoinUI, setPrejoinUI] = useState<boolean>(false);
     const [errorMessage, setErrorMessage] = useState<string>("");
     const conferenceService = new ConferenceService();
+    const [username, setUsername] = useState<string>('');
+    const userService = new UserService();
+
+    useEffect(() => {
+        if (!Cookies.get("id")) {
+            router.push("/sign-in");
+        }
+        const id = Cookies.get("id");
+        if (id) {
+            userService.getUserById(Number(id)).then((response) => {
+                const username = response.data.username;
+                setUsername(username);
+            });
+        }
+
+    },[]);
 
     const createRoom = async() => {
         if(!roomName.trim()){
@@ -33,7 +51,7 @@ function ConferenceCreation(){
             const chatSelected = (chat == "No")? false : true;
             const advacedChat = (chat == "Básico" || !chatSelected)? false : true;
             await conferenceService.createRoom(
-                roomName, 
+                `${username}-${roomName}`,
                 privacySelected, 
                 {
                     enable_chat: chatSelected,
@@ -105,7 +123,7 @@ function ConferenceCreation(){
                                 Crear Sala
                             </button>
                             <button
-                                onClick={() => router.push("/conference-list")}
+                                onClick={() => router.back()}
                                 className="bg-gray-200 text-gray-700 px-6 py-3 rounded-lg shadow-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-300 transition"
                             >
                                 Ver Salas
