@@ -2,6 +2,7 @@
 .terms-content {
     padding: 2rem;
     color: #343a40;
+    overflow-y: auto;
   }
   
   .terms-content h1 {
