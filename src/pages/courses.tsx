@@ -82,7 +82,7 @@ const Courses: React.FC = () => {
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />
-                <div className="flex-1 p-8">
+                <div className="flex-1 p-8 bg-gray-500">
                     <h1 className="text-3xl font-extrabold mb-8 text-white">Explora nuestros cursos</h1>
 
                     <div className="flex justify-between mb-6">

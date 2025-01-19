@@ -19,6 +19,7 @@ function HomeStudent() {
   const [categories,setCategories] = useState([]);
 
   useEffect(() => {
+
     if (typeof window !== "undefined") {
       const token = Cookies.get("token");
       setIsAuthenticated(token !== null);
