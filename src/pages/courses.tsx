@@ -10,6 +10,7 @@ import { CourseDTO } from "@/models/course.dto";
 import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
 import { ShoppingCartService } from "@/services/shopping-cart.service";
+import Cookies from 'js-cookie';
 
 const Courses: React.FC = () => {
     const [cart, setCart] = useState<CourseDTO[]>([]);
@@ -20,9 +21,7 @@ const Courses: React.FC = () => {
     const [courseService] = useState(new CourseService());
     const [courses, setCourses] = useState<CourseDTO[]>([]);
     const [openCart, setOpenCart] = useState(false);
-    const shoppingCartService = new ShoppingCartService(); // Initialize the shopping cart service
-
-    // Fetch the courses
+    const [shoppingCartService] = useState(new ShoppingCartService)
     useEffect(() => {
         courseService.getCoursesByPage(1, 6).then((response) => {
             setCourses(response.data);
@@ -31,12 +30,11 @@ const Courses: React.FC = () => {
         });
     }, []);
 
-    // Fetch the current cart on component mount
     useEffect(() => {
         shoppingCartService.getShoppingCart().then((response) => {
-            setCart(response); // Set cart from backend
+            setCart(response); 
         }).catch(() => {
-            setCart([]); // Fallback to empty cart on error
+            setCart([]); 
         });
     }, []);
 
@@ -47,12 +45,15 @@ const Courses: React.FC = () => {
         });
     };
 
-    const addToCart = async (course: CourseDTO) => {
+    const addToCart = async () => {
         try {
-            const userId = 123; // Replace this with the actual user ID from your context or auth service
-            await shoppingCartService.addCourseToCart(course.id, userId); // Pass userId as well
-            setCart([...cart, course]); // Update frontend cart state
-            setAddedCourse(course.id);
+            const userId = Cookies.get("id");
+            const ids : number[] = []
+            courses.map((course: CourseDTO) => {
+                ids.push(course.id)
+            });
+            await shoppingCartService.addCourseToCart(ids, Number(userId));
+            setCart(courses)
             setTimeout(() => {
                 setAddedCourse(null);
             }, 2000);

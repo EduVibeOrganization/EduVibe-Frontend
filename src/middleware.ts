@@ -3,29 +3,33 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
     const token = request.cookies.get("token")?.value;
     const payload = atob(token?.split('.')[1] || '');
-    const role = JSON.parse(payload).roles[0]
-    const pathname = request.nextUrl.pathname;
+    try{
+        const role = JSON.parse(payload).roles[0]
+        const pathname = request.nextUrl.pathname;
 
-    if (!token && !['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/sign-in', request.url));
-    }
+        if (!token && !['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname)) {
+            return NextResponse.redirect(new URL('/sign-in', request.url));
+        }
 
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname) && role === 'STUDENT') {
-        return NextResponse.redirect(new URL('/home-student', request.url));
-    }
+        if (token && ['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname) && role === 'STUDENT') {
+            return NextResponse.redirect(new URL('/home-student', request.url));
+        }
 
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname) && role === 'TEACHER') {
-        return NextResponse.redirect(new URL('/home-teacher', request.url));
-    }
+        if (token && ['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname) && role === 'TEACHER') {
+            return NextResponse.redirect(new URL('/home-teacher', request.url));
+        }
 
-    if(role === 'STUDENT' && ['/home-teacher', '/conference-creation',  '/teacher-information'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/home-student', request.url));
-    }
+        if(token && role === 'STUDENT' && ['/home-teacher', '/conference-creation',  '/teacher-information'].includes(pathname)) {
+            return NextResponse.redirect(new URL('/home-student', request.url));
+        }
 
-    if(role === 'TEACHER' && ['/home-student'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/home-teacher', request.url));
+        if(token && role === 'TEACHER' && ['/home-student', '/conference-creation', '/student-information'].includes(pathname)) {
+            return NextResponse.redirect(new URL('/home-teacher', request.url));
+        }
+        return NextResponse.next();
+    } catch(_){
     }
-    return NextResponse.next();
+    
 }
 
 export const config = {
@@ -50,17 +54,6 @@ export const config = {
         '/courses',
         '/course-info',
         '/course-video',
-        '/teacher-information',
-        '/admin-authorization',
-        '/admin-businness',
-        '/admin-complains-book',
-        '/admin-contact',
-        '/admin-event',
-        '/admin-privacy-policy',
-        '/admin-qa',
-        '/admin-shopping',
-        '/admin-sites',
-        '/admin-terms-conditions', 
-
+        '/teacher-information'
     ],
 };

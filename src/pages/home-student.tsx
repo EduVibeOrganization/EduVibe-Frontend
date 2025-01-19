@@ -3,7 +3,6 @@ import { Carousel } from "primereact/carousel";
 import { useRouter } from "next/navigation";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { CustomSideBar } from "@/components/custom-sidebar.component";
 import { Footer } from "@/components/custom-footer.component";
 import { CustomNavBar } from "@/components/custom-navbar.component";
 import { useEffect, useState } from "react";

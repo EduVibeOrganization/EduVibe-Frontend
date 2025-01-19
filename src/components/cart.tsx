@@ -60,7 +60,7 @@ const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
                         <div className="mt-6 flex justify-between items-center border-t pt-4">
                             <span className="font-semibold text-gray-800 text-lg">
                                 Total: $
-                                {cart.reduce((total, course) => total + course.price, 0).toFixed(2)}                            </span>
+                                {cart.reduce((total, course) => Number(total) + Number(course.price), 0)}                            </span>
                             <button className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
                                 Proceder al Pago
                             </button>
