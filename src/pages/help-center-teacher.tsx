@@ -2,18 +2,17 @@ import React from "react";
 import Link from "next/link";
 import "../app/globals.css";
 import "../app/assets/styles/public.css";
-import { CustomSideBar } from "@/components/custom-sidebar.component";
 import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
-import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
+import { SidebarItemsTeacher } from "@/components/sidebar-items-teacher.component";
 
 function HelpCenterTeacher() {
     return (
         <div className="content-background">
             <div className="content-container">
                 <CustomSidebarDX
-                    sidebarItems={<SidebarItemsStudent />}
-                    mainBackgroundColor="#25A0D2"
-                    headerBackgroundColor="#0D556E"
+                    sidebarItems={<SidebarItemsTeacher />}
+                    mainBackgroundColor="#0D556E"
+                    headerBackgroundColor="#062f3e"
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />
