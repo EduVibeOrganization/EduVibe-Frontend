@@ -116,12 +116,12 @@ function HomeStudent() {
         />
         <div className="flex-1 overflow-y-auto">
           <CustomNavBar categories={categories} isAuthenticated={isAuthenticated} />
-            <div className="bg-[#23A8E1] text-white p-16 lg:p-24 relative overflow-hidden">
+            <div className="bg-[#062f3e] text-white p-16 lg:p-24 relative overflow-hidden">
               <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-start lg:items-center">
                 <div className="max-w-xl z-10 lg:ml-0 lg:mr-8 mb-8 lg:mb-0">
                   <h1 className="text-4xl lg:text-5xl font-extrabold mb-6">
                     Alcanza tus metas con{" "}
-                    <span className="text-yellow-300">Handin</span>
+                    <span className="text-[#007BFF]">Handin</span>
                   </h1>
                   <p className="text-lg lg:text-xl mb-8">
                     Si piensas que la tecnología es difícil, es porque no conoces
@@ -129,7 +129,7 @@ function HomeStudent() {
                     cursos. Por eso en español <b>#NadieExplicaMejor</b> que Handin.
                   </p>
                   <button
-                    className="bg-black text-white py-4 px-10 rounded-lg transition-colors"
+                    className="bg-[#007BFF] text-white py-4 px-10 rounded-lg transition-colors"
                     onClick={() => router.push("/courses")}
                   >
                     Comienza ahora
@@ -149,7 +149,7 @@ function HomeStudent() {
               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <h2 className="text-center text-3xl font-bold mb-8 text-gray-800">
                   Explora <span className="text-[#23A8E1]">las increíbles</span>{" "}
-                  características de <span className="text-yellow-300">Handin</span> y
+                  características de <span className="text-[#007BFF]">Handin</span> y
                   transforma tu aprendizaje
                 </h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
