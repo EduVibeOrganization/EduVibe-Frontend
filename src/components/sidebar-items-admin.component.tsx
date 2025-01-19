@@ -11,6 +11,7 @@ export function SidebarItemsAdmin(){
             <SidebarItem2 icon={"pi pi-at"} title={"Contacto"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-contact")}/>    
             <SidebarItem2 icon={"pi pi-users"} title={"Cuentas"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-account")}/>    
             <SidebarItem2 icon={"pi pi-share-alt"} title={"Cuentas Sociales"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-social-account")}/>    
+            <SidebarItem2 icon={"pi pi-calendar"} title={"Evento"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-event")}/> 
             <SidebarItem2 icon={"pi pi-book"} title={"Libro de Reclamaciones"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-complains-book")}/>    
             <SidebarItem2 icon={"pi pi-unlock"} title={"Política de Privacidad"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-privacy-policy")}/>    
             <SidebarItem2 icon={"pi pi-question-circle"} title={"Preguntas Frecuentes"} textColor="#C2C7D0" backgroundAccentColor="#007BFF" textAccentColor="white" onClick={() => router.push("/admin-qa")}/>
