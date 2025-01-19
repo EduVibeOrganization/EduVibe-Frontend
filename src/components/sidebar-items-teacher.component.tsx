@@ -19,13 +19,3 @@ export function SidebarItemsTeacher(){
         </div>
     );
 }
-
-/*
-<CustomSidebarDX
-                    sidebarItems={<SidebarItemsTeacher />}
-                    mainBackgroundColor="#01465E"
-                    headerBackgroundColor="#012a39"
-                    headerTextColor="white"
-                    headerIconColor="#23A8E1"
-                />
- */
