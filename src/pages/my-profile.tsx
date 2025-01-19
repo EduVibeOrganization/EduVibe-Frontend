@@ -6,15 +6,16 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { UserService } from '../services/user.service';
 import { Profile } from "../models/profile.dto";
+import Cookies from "js-cookie";
 function MyProfile(){
     const navigator = useRouter();
     const [userService] = useState<UserService>(new UserService());
     const [profile, setProfile] = useState<Profile>({ username: "", email: "", phoneNumber: "", role: "" });
     useEffect(() => {
-        if (!sessionStorage.getItem("token")) {
+        if (!Cookies.get("id")) {
             navigator.push("/sign-in");
         }
-        const id = sessionStorage.getItem("id");
+        const id = Cookies.get("id");
         if (id) {
             userService.getUserById(Number(id)).then((response) => {
                 const role = response.data.userRole;

@@ -4,30 +4,13 @@ export function middleware(request: NextRequest) {
     const token = request.cookies.get("token")?.value;
     const pathname = request.nextUrl.pathname;
 
-    if (!token && !['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+    if (!token && !['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname)) {
         return NextResponse.redirect(new URL('/sign-in', request.url));
     }
 
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
+    if (token && ['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname)) {
         return NextResponse.redirect(new URL('/home-student', request.url));
     }
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/help-center-student', request.url));
-    }
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/help-center-teacher', request.url));
-    }
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/conference-creation', request.url));
-    }
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
-        return NextResponse.redirect(new URL('conference-left', request.url));
-    }
-    if (token && ['/sign-in', '/', '/sign-up', '/recover-password'].includes(pathname)) {
-        return NextResponse.redirect(new URL('/conference-list', request.url));
-    }
-
-
     return NextResponse.next();
 }
 
@@ -43,5 +26,15 @@ export const config = {
         '/conference-creation',
         '/conference-left',
         '/conference-list',
+        '/my-profile',
+        '/contact',
+        '/select-role',
+        '/conference-screen-simplified',
+        '/conference-screen',
+        '/confirm-password',
+        '/courses',
+        '/course-info',
+        '/course-video',
+        '/teacher-information'
     ],
 };
