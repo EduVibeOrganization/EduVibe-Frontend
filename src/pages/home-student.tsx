@@ -8,6 +8,7 @@ import { Footer } from "@/components/custom-footer.component";
 import { CustomNavBar } from "@/components/custom-navbar.component";
 import { useEffect, useState } from "react";
 import { CategoryService } from "@/services/ category.service";
+import Cookies from 'js-cookie';
 
 function HomeStudent() {
   const router = useRouter();
@@ -17,7 +18,7 @@ function HomeStudent() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const token = sessionStorage.getItem("token");
+      const token = Cookies.get("token");
       setIsAuthenticated(token !== null);
     }
     categoryService.getCategories().then((response: any) => {
