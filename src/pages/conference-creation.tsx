@@ -61,9 +61,7 @@ function ConferenceCreation(){
                 />
                 <div className="card-container">
                     <div className="card">
-                        <h2 className="text-4xl font-extrabold text-gray-800 mb-6 text-center">
-                            Crear Nueva Sala
-                        </h2>
+                        <h2 className="title">Crear Nueva Sala</h2>
                         <p className="text-gray-700 text-center mb-6 text-lg">
                             Personaliza tu sala y configura las opciones para comenzar a colaborar con tu equipo.
                         </p>
