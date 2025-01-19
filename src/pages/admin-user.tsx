@@ -1,4 +1,4 @@
-import { CustomSidebarDX } from "@/components/custom-sidebar-admin.component";
+import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import "../app/assets/styles/public.css";
 import { SidebarItemsAdmin } from "@/components/sidebar-items-admin.component";
 

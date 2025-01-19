@@ -1,4 +1,4 @@
-import { CustomSidebarDX } from "@/components/custom-sidebar-admin.component";
+import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import { SidebarItemsAdmin } from "@/components/sidebar-items-admin.component";
 import { useEffect, useState } from "react";
 import { UserService } from "@/services/user.service";
