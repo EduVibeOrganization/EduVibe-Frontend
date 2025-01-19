@@ -82,12 +82,20 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
         }
     }
 
+    const headerTemplate = () => {
+        return (
+            <div className="m-5">
+                <span className="font-bold white-space-nowrap">Editar Sala: {room?.room_name}</span>
+            </div>
+        );
+    }
+
     const footerTemplate = () => {
         return (
-            <div>
+            <div className='flex justify-center gap-5 m-5'>
                 <CustomButtonDX 
                     title="Actualizar Sala" 
-                    onSubmit={handleUpdateRoom} 
+                    onSubmit={handleUpdateRoom}
                     icon="pi pi-check"
                 />
                 <CustomButtonDX 
@@ -101,29 +109,29 @@ export function EditRoomDialog({ visible, onHide, room, onUpdate }: EditRoomDial
     }
 
     return (
-        <Dialog header={`Editar Sala: ${room?.room_name}`} visible={visible} style={{ width: '500px' }} modal onHide={onHide} footer={footerTemplate}>
-                <div className="card">
-                    <CustomRow 
-                        label={'Privacidad'} 
-                        component={<CustomSelectorComponent value={privacy} options={["Privado", "Público"]} onChange={setPrivacy} />}
-                    />
-                    <CustomRow 
-                        label={'Chat de Texto'} 
-                        component={<CustomSelectorComponent value={chatType} options={["No", "Básico", "Avanzado"]} onChange={setChatType}/>}
-                    />
-                    <CustomRow
-                        label={'Compartir Pantalla'}
-                        component={<CustomInputSwitch initialValue={enableScreenShare} onChange={setEnableScreenShare} />}
-                    />
-                    <CustomRow 
-                        label={'Levantar la mano'} 
-                        component={<CustomInputSwitch initialValue={enable_hand_raising} onChange={setHandRaising} />}
-                    />
-                    <CustomRow 
-                        label={'Sala de espera'} 
-                        component={<CustomInputSwitch initialValue={enable_prejoin_ui} onChange={setPrejoinUI} />}
-                    />
-                </div>
+        <Dialog header={headerTemplate} visible={visible} modal onHide={onHide} footer={footerTemplate}>
+            <div className="card" style={{boxShadow: "none", borderRadius: "0"}}>
+                <CustomRow 
+                    label={'Privacidad'} 
+                    component={<CustomSelectorComponent value={privacy} options={["Privado", "Público"]} onChange={setPrivacy} />}
+                />
+                <CustomRow 
+                    label={'Chat de Texto'} 
+                    component={<CustomSelectorComponent value={chatType} options={["No", "Básico", "Avanzado"]} onChange={setChatType}/>}
+                />
+                <CustomRow
+                    label={'Compartir Pantalla'}
+                    component={<CustomInputSwitch initialValue={enableScreenShare} onChange={setEnableScreenShare} />}
+                />
+                <CustomRow 
+                    label={'Levantar la mano'} 
+                    component={<CustomInputSwitch initialValue={enable_hand_raising} onChange={setHandRaising} />}
+                />
+                <CustomRow 
+                    label={'Sala de espera'} 
+                    component={<CustomInputSwitch initialValue={enable_prejoin_ui} onChange={setPrejoinUI} />}
+                />
+            </div>
         </Dialog>
     );
 }
