@@ -17,6 +17,33 @@
     width: 80%;
 }
 
+.order-list .p-orderlist .p-button {
+    color: white;
+    background-color: #06b6d4;
+    margin: 0.5rem;
+    padding: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.order-list .p-orderlist .p-orderlist-list-container .p-orderlist-header {
+    padding: 1.3rem;
+    border-radius: 5px;
+}
+
+.order-list .p-orderlist .p-orderlist-list-container .p-orderlist-filter-container {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.order-list .p-orderlist .p-orderlist-list-container .p-orderlist-filter-container .p-orderlist-filter .p-orderlist-filter-input {
+    padding: 0.5rem;
+    border-width: 3px;
+}
+
+.order-list .p-orderlist .p-orderlist-list-container .p-orderlist-filter-container .p-orderlist-filter .p-orderlist-filter-icon {
+    align-self: center;
+}
+
 .room-list {
     display: flex;
     align-items: center;
