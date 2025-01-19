@@ -1,4 +1,4 @@
-"use client";
+
 import { useRouter } from "next/navigation";
 import { ContentIndicator } from "@/components/content-indicator.component";
 import { CustomButton } from "@/components/custom-button.component";
@@ -10,7 +10,7 @@ import "../app/assets/styles/public.css";
 import { useState } from "react";
 import { SignInDTO } from "@/models/sign-in.dto";
 import { AuthService } from '../services/auth.service';
-
+import Cookies from "js-cookie";
 
 
 function SignIn(){
@@ -33,8 +33,8 @@ function SignIn(){
           await authService.signIn(userToAuthenticate).then((response) => {
             const token = response.data.token;
             const id = response.data.id;
-            sessionStorage.setItem("token", token);
-            sessionStorage.setItem("id", id);
+            Cookies.set("token", token);
+            Cookies.set("id", id);
           });
           alert("Has iniciado sesión correctamente!!");
           router.push("/home-student");
