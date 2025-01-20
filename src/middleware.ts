@@ -27,6 +27,9 @@ export function middleware(request: NextRequest) {
         if(token && role === 'TEACHER' && ['/home-student', '/student-information', '/course-complete', '/admin-user', '/admin-account', '/admin-authorization', '/admin-business'].includes(pathname)) {
             return NextResponse.redirect(new URL('/home-teacher', request.url));
         }
+        if(token && role === 'ADMIN' && ['/home-student', '/student-information', '/course-complete', '/home-teacher', '/teacher-information', '/create-course'].includes(pathname)) {
+            return NextResponse.redirect(new URL('/admin-user', request.url));
+        }
         return NextResponse.next();
     } catch(_){
     }
