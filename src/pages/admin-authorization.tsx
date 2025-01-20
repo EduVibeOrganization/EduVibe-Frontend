@@ -5,12 +5,13 @@ import { UserService } from "@/services/user.service";
 
 import "../app/assets/styles/public.css";
 import "../app/assets/styles/admin-auth.css";
+import "../app/assets/styles/admin.css";
 import { Profile } from "@/models/profile.dto";
+import { CustomButtonDX } from "@/components/custom-button-dx.component";
 
 function AdminAuthorization() {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [selectedProfile, setSelectedProfile] = useState<Profile>();
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const userService = new UserService();
@@ -23,29 +24,8 @@ function AdminAuthorization() {
             )
             );
             setProfiles(profiles);
-            setLoading(false);
         });
     }, []);
-
-    if (loading) {
-        return (
-            <div className="content-background">
-                <div className="content-container">
-                    <CustomSidebarDX
-                        sidebarItems={<SidebarItemsAdmin />}
-                        mainBackgroundColor="#343A40"
-                        headerBackgroundColor="#23272B"
-                        headerTextColor="white"
-                        headerIconColor="#007BFF"
-                    />
-                    <div className="admin-auth-content">
-                        <h1>Autenticación y Autorización</h1>
-                        <p className="loading-text">Cargando usuarios...</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="content-background">
@@ -57,41 +37,55 @@ function AdminAuthorization() {
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />
-                <div className="admin-auth-content">
-                    <h1>Autenticación y Autorización</h1>
-                    <p className="warning-text">
-                        ⚠️ En este módulo se pueden administrar y asignar permisos. Se recomienda precaución ante cualquier modificación.
-                    </p>
-                    <div className="user-list-section">
-                        <h2>Usuarios</h2>
-                        <ul className="user-list">
-                            {profiles.map((user) => (
-                                <li
-                                    key={user.username}
-                                    className={`user-item ${ selectedProfile?.username === user.username ? "selected" : ""}`}
-                                    onClick={() => setSelectedProfile(user)}
-                                >
-                                    {user.username} - <strong>{user.role}</strong>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                    {selectedProfile && (
-                        <div className="user-details">
-                            <h3>Detalles del Usuario</h3>
-                            <p><strong>Email:</strong> {selectedProfile.email} </p>
-                            <p><strong>Nombre de Usuario:</strong> {selectedProfile.username}</p>
-                            <p><strong>Teléfono:</strong> {selectedProfile.phoneNumber}</p>
-                            <p><strong>Rol:</strong> {selectedProfile.role}</p>
-                            <button
-                                className="assign-permission-button"
-                                onClick={() =>alert(`Permisos asignados a ${selectedProfile.username} : (${selectedProfile.role})`)}
-                            >
-                                Asignar Permisos
-                            </button>
+                <main className="admin-content">
+                    <div className="content">
+                        <h1 className="title">Autenticación y Autorización</h1>
+                        <div className="info"  style={{borderColor: "#007BFF"}}>
+                            <p> En este módulo se pueden administrar y asignar permisos. Se recomienda precaución ante cualquier modificación. </p>
                         </div>
-                    )}
-                </div>
+                        <div className="section">
+                            <section>
+                                <h2 className="subtitle">Usuarios</h2>
+                                <ul className="user-list">
+                                    {profiles.map((user) => (
+                                        <li
+                                            key={user.username}
+                                            className={`user-item ${ selectedProfile?.username === user.username ? "selected" : ""}`}
+                                            onClick={() => setSelectedProfile(user)}
+                                        >
+                                            {user.username} - <strong>{user.role}</strong>
+                                        </li>
+                                    ))}
+                                </ul>
+                            </section>
+                            {selectedProfile && (
+                                <section className="user-details">
+                                    <h3 className="subtitle">Detalles del Usuario</h3>
+                                    <table className="table">
+                                        <thead>
+                                            <tr>
+                                                <th>Email</th>
+                                                <th>Nombre de Usuario</th>
+                                                <th>Teléfono</th>
+                                                <th>Rol</th>
+                                                <th>Asignar Permisos</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{selectedProfile.email}</td>
+                                                <td>{selectedProfile.username}</td>
+                                                <td>{selectedProfile.phoneNumber}</td>
+                                                <td>{selectedProfile.role}</td>
+                                                <td><CustomButtonDX title="Asignar" color="#007BFF" size="small" onSubmit={() =>alert(`Permisos asignados a ${selectedProfile.username} : (${selectedProfile.role})`)}/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </section>
+                            )}
+                        </div>
+                    </div>
+                </main>
             </div>
         </div>
     );

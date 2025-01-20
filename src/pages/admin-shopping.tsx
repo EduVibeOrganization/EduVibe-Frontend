@@ -1,8 +1,9 @@
 import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
-import "../app/assets/styles/public.css";
-import "../app/assets/styles/admin-shopping.css";
 import { SidebarItemsAdmin } from "@/components/sidebar-items-admin.component";
 import { useEffect, useState } from "react";
+import "../app/assets/styles/public.css";
+import "../app/assets/styles/admin.css";
+import { CustomButtonDX } from "@/components/custom-button-dx.component";
 
 function AdminShopping() {
     const [orders, setOrders] = useState([]);
@@ -80,79 +81,72 @@ function AdminShopping() {
                     headerTextColor="white"
                     headerIconColor="#007BFF"
                 />
-                <div className="admin-shopping-content">
-                    <h1>Compras</h1>
-                    <p className="warning-text">
-                        ⚠️ Aquí puedes visualizar las órdenes de compra y sus detalles.
-                    </p>
-                    <div className="orders-section">
-                        <h2>Órdenes de Compra</h2>
-                        <table className="orders-table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Usuario</th>
-                                    <th>Fecha</th>
-                                    <th>Método de Pago</th>
-                                    <th>Total</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {orders.map((order) => (
-                                    <tr key={order.id}>
-                                        <td>{order.id}</td>
-                                        <td>{order.user}</td>
-                                        <td>{order.purchaseDate}</td>
-                                        <td>{order.paymentMethod}</td>
-                                        <td>
-                                            {order.total} {order.currency}
-                                        </td>
-                                        <td>
-                                            <button
-                                                className="view-details-button"
-                                                onClick={() => setSelectedOrder(order)}
-                                            >
-                                                Ver Detalle
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
-                    </div>
-                    {selectedOrder && (
-                        <div className="order-details-section">
-                            <h3>Detalle de la Orden #{selectedOrder.id}</h3>
-                            <ul className="courses-list">
-                                {selectedOrder.courses.map((course) => (
-                                    <li key={course.id} className="course-item">
-                                        <img
-                                            src={course.banner}
-                                            alt={course.title}
-                                            className="course-banner"
-                                        />
-                                        <div className="course-info">
-                                            <h4>{course.title}</h4>
-                                            <p>{course.subtitle}</p>
-                                            <p><strong>Descripción:</strong> {course.description}</p>
-                                            <p><strong>Duración:</strong> {course.hours} horas</p>
-                                            <p><strong>Inicio:</strong> {course.startDate}</p>
-                                            <p><strong>Fin:</strong> {course.endDate}</p>
-                                            <p><strong>Precio:</strong> {course.price} PEN</p>
-                                        </div>
-                                    </li>
-                                ))}
-                            </ul>
-                            <button
-                                className="close-details-button"
-                                onClick={() => setSelectedOrder(null)}
-                            >
-                                Cerrar Detalle
-                            </button>
+                <main className="admin-content">
+                    <div className="content">
+                        <h1 className="title">Compras</h1>
+                        <div className="info"  style={{borderColor: "#ffc107"}}>
+                            <p>⚠️ Aquí puedes visualizar las órdenes de compra y sus detalles.</p>
+                            <p>Se recomienda no interactuar con esta información para no causar ningún problema</p>
                         </div>
-                    )}
-                </div>
+                        <div className="section">
+                            <h2 className="subtitle">Órdenes de Compra</h2>
+                            <table className="table">
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Usuario</th>
+                                        <th>Fecha</th>
+                                        <th>Método de Pago</th>
+                                        <th>Total</th>
+                                        <th>Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {orders.map((order) => (
+                                        <tr key={order.id}>
+                                            <td>{order.id}</td>
+                                            <td>{order.user}</td>
+                                            <td>{order.purchaseDate}</td>
+                                            <td>{order.paymentMethod}</td>
+                                            <td>{order.total} {order.currency}</td>
+                                            <td><CustomButtonDX title={"Ver detalle"} size="small" color="#007BFF" onSubmit={() => setSelectedOrder(order)}/></td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        {selectedOrder && (
+                            <div className="order-details-section">
+                                <header className="order-details-header">
+                                    <h3 className="subtitle">Detalle de la Orden #{selectedOrder.id}</h3>
+                                    <CustomButtonDX title="Cerrar Detalle" size="medium" color="#007BFF" onSubmit={() => setSelectedOrder(null)}/>
+                                </header>
+                                <section className="order-details-content">
+                                    <ul className="courses-list">
+                                        {selectedOrder.courses.map((course) => (
+                                            <li key={course.id} className="course-item">
+                                                <img
+                                                    src={course.banner}
+                                                    alt={course.title}
+                                                    className="course-banner"
+                                                />
+                                                <div className="course-info">
+                                                    <h4 className="subtitle">{course.title}</h4>
+                                                    <p>{course.subtitle}</p>
+                                                    <p><strong>Descripción:</strong> {course.description}</p>
+                                                    <p><strong>Duración:</strong> {course.hours} horas</p>
+                                                    <p><strong>Inicio:</strong> {course.startDate}</p>
+                                                    <p><strong>Fin:</strong> {course.endDate}</p>
+                                                    <p><strong>Precio:</strong> {course.price} PEN</p>
+                                                </div>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </section>
+                            </div>
+                        )}
+                    </div>
+                </main>
             </div>
         </div>
     );

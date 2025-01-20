@@ -5,7 +5,8 @@ import { UserService } from "@/services/user.service";
 import { useState, useEffect } from "react";
 
 import "../app/assets/styles/public.css";
-import "../app/assets/styles/admin-complains-book.css";
+import "../app/assets/styles/admin.css";
+
 
 function AdminComplainsBook() {
     const [profiles, setProfiles] = useState<Profile[]>([]);
@@ -29,46 +30,48 @@ function AdminComplainsBook() {
     return (
         <div className="content-background">
             <div className="content-container">
-            <CustomSidebarDX
-                sidebarItems={<SidebarItemsAdmin />}
-                mainBackgroundColor="#343A40"
-                headerBackgroundColor="#23272B"
-                headerTextColor="white"
-                headerIconColor="#007BFF"
-            />
-            <div className="complaints-content">
-                <h1>Libro de Reclamaciones</h1>
-                <table className="complaints-table">
-                <thead>
-                    <tr>
-                        <th>Usuario</th>
-                        <th>Email</th>
-                        <th>Teléfono</th>
-                        <th>Rol</th>
-                        <th>Reclamo</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {profiles.length > 0 ? (
-                    profiles.map((profile, index) => (
-                        <tr key={index}>
-                            <td>{profile.username}</td>
-                            <td>{profile.email}</td>
-                            <td>{profile.phoneNumber}</td>
-                            <td>{profile.role}</td>
-                            <td>Mal servicio</td>
-                        </tr>
-                    ))
-                    ) : (
-                    <tr>
-                        <td colSpan={4} className="no-data">
-                        No hay reclamaciones disponibles.
-                        </td>
-                    </tr>
-                    )}
-                </tbody>
-                </table>
-            </div>
+                <CustomSidebarDX
+                    sidebarItems={<SidebarItemsAdmin />}
+                    mainBackgroundColor="#343A40"
+                    headerBackgroundColor="#23272B"
+                    headerTextColor="white"
+                    headerIconColor="#007BFF"
+                />
+                <main className="admin-content">
+                    <div className="content">
+                        <h1 className="title">Libro de Reclamaciones</h1>
+                        <table className="table">
+                        <thead>
+                            <tr>
+                                <th>Usuario</th>
+                                <th>Email</th>
+                                <th>Teléfono</th>
+                                <th>Rol</th>
+                                <th>Reclamo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {profiles.length > 0 ? (
+                            profiles.map((profile, index) => (
+                                <tr key={index}>
+                                    <td>{profile.username}</td>
+                                    <td>{profile.email}</td>
+                                    <td>{profile.phoneNumber}</td>
+                                    <td>{profile.role}</td>
+                                    <td>Mal servicio</td>
+                                </tr>
+                            ))
+                            ) : (
+                            <tr>
+                                <td colSpan={4}>
+                                No hay reclamaciones disponibles.
+                                </td>
+                            </tr>
+                            )}
+                        </tbody>
+                        </table>
+                    </div>
+                </main>
             </div>
         </div>
     );
