@@ -1,23 +1,25 @@
+import { ShoppingCartResponseDTO } from "@/models/shopping-cart-response.dto";
 import http from "./http-common";
-import { CourseDTO } from "@/models/course.dto";
+import { ShoppingCartRequestDTO } from "@/models/shopping-cart-request.dto";
 
 export class ShoppingCartService {
     endpoint = "/shopping-cart";
 
-    async getShoppingCart(): Promise<CourseDTO[]> {
+    async addCourseToCart(shoppingCartRequestDTO: ShoppingCartRequestDTO): Promise<string> {
+        return await http.post(this.endpoint,shoppingCartRequestDTO);
+    }
+
+    async deleteCourseFromShoppingCart(shoppingCartRequestDTO: ShoppingCartRequestDTO): Promise<string> {
+        return await http.delete(this.endpoint, {data: shoppingCartRequestDTO});
+    }
+
+    async getAllShoppingCarts(): Promise<ShoppingCartResponseDTO[]> {
         const response = await http.get(this.endpoint);
         return response.data;
     }
 
-
-    async addCourseToCart(courseIds: number[], userId: number): Promise<any> {
-    return await http.post(this.endpoint, { courseIds, userId });
+    async getShoppingCartByUserId(userId: number): Promise<ShoppingCartResponseDTO>{
+        const response = await http.get(`${this.endpoint}/${userId}`);
+        return response.data;
     }
-
-
-    async removeCourseFromCart(courseId: number): Promise<any> {
-        return await http.delete(`${this.endpoint}/${courseId}`);
-    }
-
-
 }

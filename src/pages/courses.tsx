@@ -11,6 +11,7 @@ import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import { SidebarItemsStudent } from "@/components/sidebar-items-student.component";
 import { ShoppingCartService } from "@/services/shopping-cart.service";
 import Cookies from 'js-cookie';
+import { ShoppingCartRequestDTO } from "@/models/shopping-cart-request.dto";
 
 const Courses: React.FC = () => {
     const [cart, setCart] = useState<CourseDTO[]>([]);
@@ -21,7 +22,9 @@ const Courses: React.FC = () => {
     const [courseService] = useState(new CourseService());
     const [courses, setCourses] = useState<CourseDTO[]>([]);
     const [openCart, setOpenCart] = useState(false);
-    const [shoppingCartService] = useState(new ShoppingCartService)
+    const [shoppingCartService] = useState(new ShoppingCartService());
+    const userId = Number(Cookies.get("id"));
+
     useEffect(() => {
         courseService.getCoursesByPage(1, 6).then((response) => {
             setCourses(response.data);
@@ -31,12 +34,15 @@ const Courses: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        shoppingCartService.getShoppingCart().then((response) => {
-            setCart(response); 
+        shoppingCartService.getShoppingCartByUserId(userId).then((response) => {
+            const coursesInCart = response.courseIds.map((courseId: number) => 
+                courses.find((course) => course.id === courseId)
+            ).filter(Boolean);
+            setCart(coursesInCart);
         }).catch(() => {
-            setCart([]); 
+            setCart([]);
         });
-    }, []);
+    }, [userId, courses]);
 
     const onPageChange = (event: any) => {
         setFirst(event.first);
@@ -45,28 +51,31 @@ const Courses: React.FC = () => {
         });
     };
 
-    const addToCart = async () => {
+    const addToCart = async (courseId: number) => {
         try {
-            const userId = Cookies.get("id");
-            const ids : number[] = []
-            courses.map((course: CourseDTO) => {
-                ids.push(course.id)
-            });
-            await shoppingCartService.addCourseToCart(ids, Number(userId));
-            setCart(courses)
-            setTimeout(() => {
-                setAddedCourse(null);
-            }, 2000);
+            const courseToAdd = courses.find(course => course.id === courseId);
+            if (courseToAdd) {
+                const shoppingCartRequestDTO = new ShoppingCartRequestDTO(userId, courseId);
+                await shoppingCartService.addCourseToCart(shoppingCartRequestDTO);
+
+                setCart((prevCart) => [...prevCart, courseToAdd]);  // Añadir el curso completo al carrito
+                setAddedCourse(courseId);
+                
+                setTimeout(() => {
+                    setAddedCourse(null);
+                }, 2000);
+            }
         } catch (error) {
             console.error("Failed to add course to cart", error);
         }
     };
-    
 
-    const removeFromCart = async (id: number) => {
+    const removeFromCart = async (courseId: number) => {
         try {
-            await shoppingCartService.removeCourseFromCart(id); // Remove course from backend cart
-            setCart(cart.filter((course) => course.id !== id)); // Update frontend cart state
+            const shoppingCartRequestDTO = new ShoppingCartRequestDTO(userId, courseId);
+            await shoppingCartService.deleteCourseFromShoppingCart(shoppingCartRequestDTO);
+
+            setCart((prevCart) => prevCart.filter((course) => course.id !== courseId));  // Remover curso del carrito
         } catch (error) {
             console.error("Failed to remove course from cart", error);
         }
@@ -127,13 +136,19 @@ const Courses: React.FC = () => {
                             ))}
                         </div>
                     ) : (
-                        <div className="text-white  text-center font-bold text-xl lg:text-3xl p-14 md:p-20 lg:p-28  xl:p-32">
+                        <div className="text-white text-center font-bold text-xl lg:text-3xl p-14 md:p-20 lg:p-28 xl:p-32">
                             No existen cursos disponibles
                         </div>
                     )}
 
                     <div className="card mt-10">
-                        <Paginator first={first} rows={courses.length > 6 ? courses.length / 6 : 1} totalRecords={10} onPageChange={onPageChange} template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} />
+                        <Paginator 
+                            first={first} 
+                            rows={courses.length > 6 ? courses.length / 6 : 1} 
+                            totalRecords={10} 
+                            onPageChange={onPageChange} 
+                            template={{ layout: 'PrevPageLink CurrentPageReport NextPageLink' }} 
+                        />
                     </div>
                 </div>
 
@@ -142,7 +157,7 @@ const Courses: React.FC = () => {
                         course={selectedCourse}
                         isOpen={isModalOpen}
                         onClose={closeModal}
-                        addToCart={addToCart}
+                        addToCart={() => addToCart(selectedCourse.id)}
                     />
                 )}
 

@@ -8,18 +8,19 @@ import { CourseDTO } from "@/models/course.dto";
 import { ShoppingCartService } from "@/services/shopping-cart.service";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { jsPDF } from "jspdf"; // Importar jsPDF para generar el PDF
+import Cookies from 'js-cookie';
 
 function TransactionStudent() {
     const router = useRouter();
     const [cart, setCart] = useState<CourseDTO[]>([]);
-    const [receiptType, setReceiptType] = useState<string>("boleta"); // Estado para el tipo de recibo (boleta o factura)
+    const [receiptType, setReceiptType] = useState<string>("boleta");
     const shoppingCartService = new ShoppingCartService();
+    const userId = Number(Cookies.get("id"));
 
-    // Función para obtener el carrito actualizado después del pago o cuando sea necesario
     const fetchShoppingCart = async () => {
         try {
-            const updatedCart = await shoppingCartService.getShoppingCart();
-            setCart(updatedCart);
+            const updatedCart = await shoppingCartService.getShoppingCartByUserId(userId);
+            setCart(updatedCart); // Actualizar el estado del carrito
         } catch (error) {
             console.error("Error al obtener el carrito de compras:", error);
         }
@@ -40,33 +41,24 @@ function TransactionStudent() {
         console.log("User ID:", userId);
     }, [router.query]);
 
-    // Función para manejar el pago
     const handlePayment = (details: any) => {
         console.log("Pago realizado con éxito:", details);
-        // Aquí puedes manejar lo que sucede después de un pago exitoso
     };
 
-    // Función para generar el recibo en PDF
     const generatePDF = () => {
         const doc = new jsPDF();
-        
-        // Título del recibo
         doc.setFontSize(18);
         doc.text(receiptType === "boleta" ? "Boleta de Compra" : "Factura de Compra", 20, 20);
-        
-        // Detalles de la compra
         doc.setFontSize(12);
         doc.text(`Fecha: ${new Date().toLocaleDateString()}`, 20, 30);
         doc.text(`Total: $${cart.reduce((total, course) => total + Number(course.price), 0)}`, 20, 40);
 
-        // Listado de los cursos
         let y = 50;
         cart.forEach((course) => {
             doc.text(`${course.title} - $${course.price}`, 20, y);
             y += 10;
         });
-
-        // Generar el PDF con el tipo de recibo seleccionado
+        
         doc.save(`${receiptType === "boleta" ? "boleta" : "factura"}_compra.pdf`);
     };
 
