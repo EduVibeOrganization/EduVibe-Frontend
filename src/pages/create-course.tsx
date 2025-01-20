@@ -2,7 +2,6 @@ import { CustomNavBar } from "@/components/custom-navbar.component";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { CreateCourseItem } from "@/components/create-course-item";
-import { GoalService } from "@/services/goal.service";
 import { InstructorService } from "@/services/instructor.service";
 import { CustomInputText } from "@/components/custom-input-text.component";
 import { ConvertImageService } from "@/services/convert-image.service";
@@ -10,8 +9,8 @@ import { CategoryService } from "@/services/ category.service";
 import { CreateInstructorDTO } from "@/models/create-instructor.dto";
 import { CourseRequestDTO } from "@/models/course-request.dto";
 import { CourseService } from "@/services/course.service";
-import { CreateGoalDTO } from "@/models/create-goal.dto";
 import { CustomButton } from "@/components/custom-button.component";
+import { error } from "console";
 
 function CreateCourse() {
   const [title, setTitle] = useState("");
@@ -60,14 +59,17 @@ function CreateCourse() {
 
   async function onSubmit(){
     const createInstructor = new CreateInstructorDTO(instructorName, instructorBio, instructorDegree);
-    const courseRequest = new CourseRequestDTO(title, description, categoryId,price,subtitle, duration, imageUrl, difficulty, startDate, endDate);
+    const userId = Cookies.get("id");
+    const courseRequest = new CourseRequestDTO(title, description, categoryId,price,subtitle, duration, imageUrl, difficulty, startDate, endDate, Number(userId));
     try{
         await instructorService.createInstructor(createInstructor);
     } catch (error){
         alert("Se ha producido un error al crear al instructor")
     }
     try{
-        await courseService.createCourse(courseRequest).then();
+        await courseService.createCourse(courseRequest).catch((error) => {
+            console.log(error);
+        });
     } catch (error){
         alert("Se ha producido un error al crear el curso")
     }
@@ -83,8 +85,8 @@ function CreateCourse() {
           title="Título"
           description="Ingresa el título de tu curso"
           placeholder="Título"
-          value={subtitle}
-          onChange={(e) => setSubtitle(e)}
+          value={title}
+          onChange={(e) => setTitle(e)}
         />
         <CreateCourseItem
           title="Descripción del curso"
@@ -98,8 +100,8 @@ function CreateCourse() {
           title="Subtitulo del curso"
           description="Ingresa el subtitlo de tu curso"
           placeholder="Subtitulo"
-          value={description}
-          onChange={(e) => setDescription(e)}
+          value={subtitle}
+          onChange={(e) => setSubtitle(e)}
         />
         <div className="flex flex-col lg:flex-row gap-5 mt-10">
           <CreateCourseItem
@@ -107,7 +109,7 @@ function CreateCourse() {
             description="Ingresa la duración de tu curso"
             placeholder="Duración"
             value={duration}
-            onChange={(e) => setDuration(Number(e))}
+            onChange={(e) => setDuration(Number(e))} 
           />
           <CreateCourseItem
             title="Nivel de dificultad"

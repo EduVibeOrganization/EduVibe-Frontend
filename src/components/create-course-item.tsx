@@ -5,7 +5,7 @@ interface ICreateCourseItemProps {
     description: string;
     placeholder: string;
     value: any;
-    onChange: (e: string) => void;
+    onChange: (e: any) => void;
 
 }
 export function CreateCourseItem({value,title, description, placeholder, onChange} : ICreateCourseItemProps) {

@@ -4,7 +4,7 @@ interface ICustomInputTextProps {
     value: string;
     placeHolder: string;
     hasBorder: boolean;
-    onChange: (value: string) => void;
+    onChange: (value: any) => void;
 }
 
 export function CustomInputText({value, onChange, placeHolder, hasBorder}: ICustomInputTextProps) {
