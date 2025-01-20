@@ -10,9 +10,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    transition: width 0.4s ease, background-color 0.4s ease;
+    transition: width 0.5s ease, background-color 0.5s ease;
     z-index: 1000;
-    padding: 20px 0;
+    padding: 20px 10px;
     gap: 15px;
     overflow-y: auto; /* Scroll vertical para muchos ítems */
     overflow-x: hidden; /* Evita scroll horizontal */
@@ -45,7 +45,7 @@
     padding: 5px 10px; /* Aumenta el espacio interno si es necesario */
 }
 
-/* Ítems del sidebar */
+/* Ítems del sidebar 2*/
 .sidebar-item {
     display: flex;
     align-items: center;
@@ -54,16 +54,17 @@
     width: 100%;
     padding: 10px 15px;
     cursor: pointer;
-    gap: 35px; /* Aumentado el espacio entre ícono y texto */
+    gap: 20px; /* Aumentado el espacio entre ícono y texto */
     margin-bottom: 10px;
-    transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease;
-    border-radius: 6px;
+    transition: background-color 0.5s ease, color 0.5s ease, transform 0.2s ease;
+    border-radius: 8px;
     /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); !* Sombra sutil (Quitarlo o no)*!*/
 }
 
 .sidebar-item:hover {
     background-color: #4a5568; /* Fondo al pasar el cursor */
     transform: scale(1.02); /* Efecto sutil de agrandamiento */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); /* Sombra para destacar */
 }
 
 .sidebar-item.active {
@@ -82,6 +83,8 @@
     margin-right: 20px; /* Asegura un buen espacio entre ícono y texto */
     align-self: center; /* Centrado vertical */
     line-height: 50px; /* Igual a la altura del elemento */
+    justify-content: center; /* Centra el ícono completamente */
+
 }
 
 /* Texto de los ítems */
