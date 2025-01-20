@@ -12,7 +12,6 @@ import { CustomButtonDX } from "@/components/custom-button-dx.component";
 function AdminAuthorization() {
     const [profiles, setProfiles] = useState<Profile[]>([]);
     const [selectedProfile, setSelectedProfile] = useState<Profile>();
-    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const userService = new UserService();
@@ -25,29 +24,8 @@ function AdminAuthorization() {
             )
             );
             setProfiles(profiles);
-            setLoading(false);
         });
     }, []);
-
-    if (loading) {
-        return (
-            <div className="content-background">
-                <div className="content-container">
-                    <CustomSidebarDX
-                        sidebarItems={<SidebarItemsAdmin />}
-                        mainBackgroundColor="#343A40"
-                        headerBackgroundColor="#23272B"
-                        headerTextColor="white"
-                        headerIconColor="#007BFF"
-                    />
-                    <div className="admin-auth-content">
-                        <h1>Autenticación y Autorización</h1>
-                        <p className="loading-text">Cargando usuarios...</p>
-                    </div>
-                </div>
-            </div>
-        );
-    }
 
     return (
         <div className="content-background">
