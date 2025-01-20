@@ -2,7 +2,6 @@ import { CustomSidebarDX } from "@/components/custom-sidebar-dx.component";
 import { SidebarItemsAdmin } from "@/components/sidebar-items-admin.component";
 import { useEffect, useState } from "react";
 import "../app/assets/styles/public.css";
-import "../app/assets/styles/admin-shopping.css";
 import "../app/assets/styles/admin.css";
 import { CustomButtonDX } from "@/components/custom-button-dx.component";
 
@@ -89,7 +88,7 @@ function AdminShopping() {
                             <p>⚠️ Aquí puedes visualizar las órdenes de compra y sus detalles.</p>
                             <p>Se recomienda no interactuar con esta información para no causar ningún problema</p>
                         </div>
-                        <div className="table-section">
+                        <div className="section">
                             <h2 className="subtitle">Órdenes de Compra</h2>
                             <table className="table">
                                 <thead>

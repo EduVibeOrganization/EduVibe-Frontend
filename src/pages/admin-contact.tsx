@@ -39,7 +39,7 @@ function AdminContact(){
                         <div className="info"  style={{borderColor: "#007BFF"}}>
                             <p> Esta sección muestra la información de contacto enviada por los usuarios. </p>
                         </div>
-                        <section className="table-section">
+                        <section className="section">
                             <table className="table">
                                 <thead>
                                     <tr>
