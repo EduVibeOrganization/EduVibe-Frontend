@@ -65,6 +65,17 @@ export const config = {
         '/admin-user', 
         '/admin-account', 
         '/admin-authorization', 
-        '/admin-business'
+        '/admin-business',
+        '/admin-event',
+        '/admin-privacy-policy',
+        '/admin-terms-conditions',
+        '/admin-qa',
+        '/admin-contact',
+        '/admin-businness',
+        '/admin-complains-book',
+        '/admin-shopping',
+        '/admin-sites',
+        '/admin-transaction',
+        '/admin-social-account'
     ],
 };
