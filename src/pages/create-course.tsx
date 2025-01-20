@@ -66,13 +66,7 @@ function CreateCourse() {
     } catch (error){
         alert("Se ha producido un error al crear al instructor")
     }
-    try{
-        await courseService.createCourse(courseRequest).catch((error) => {
-            console.log(error);
-        });
-    } catch (error){
-        alert("Se ha producido un error al crear el curso")
-    }
+    await courseService.createCourse(courseRequest);
 
 
   }

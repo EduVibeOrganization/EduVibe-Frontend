@@ -1,4 +1,4 @@
-import Cookies from "js-cookie";
+
 export class CourseRequestDTO{
     title: string;
     description: string;
