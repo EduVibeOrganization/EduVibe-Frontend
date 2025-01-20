@@ -10,7 +10,7 @@ import { CreateInstructorDTO } from "@/models/create-instructor.dto";
 import { CourseRequestDTO } from "@/models/course-request.dto";
 import { CourseService } from "@/services/course.service";
 import { CustomButton } from "@/components/custom-button.component";
-import { error } from "console";
+import { useRouter } from "next/navigation";
 
 function CreateCourse() {
   const [title, setTitle] = useState("");
@@ -32,7 +32,8 @@ function CreateCourse() {
   const [courseService] = useState(new CourseService());
   const [categories, setCategories] = useState([]);
   const [imageUrl, setImageUrl] = useState("");
-  const [categoryId, setCategoryId] = useState(0);
+  const [categoryId, setCategoryId] = useState(1);
+  const router = useRouter();
 
   useEffect(() => {
     categoryService.getCategories().then((response: any) => {
@@ -66,7 +67,13 @@ function CreateCourse() {
     } catch (error){
         alert("Se ha producido un error al crear al instructor")
     }
+  try{
     await courseService.createCourse(courseRequest);
+    alert("Curso creado exitosamente");
+    router.push("/home-teacher");
+  } catch (error){
+    alert("Se ha producido un error al crear el curso")
+  }
 
 
   }
@@ -156,11 +163,20 @@ function CreateCourse() {
             <p className="text-gray-500">No se ha seleccionado ninguna imagen</p>
           )}
         </div>
-        <select value={categories}  className="border-2 border-gray-300 rounded-lg p-2">
-            {categories.map((category : any) => {
-                return <option value={category.id} onChange={() => setCategoryId(category.id)}>{category.type}</option>;
+        <select
+            value={categoryId}
+            onChange={(e) => setCategoryId(Number(e.target.value))}
+            className="border-2 border-gray-300 rounded-lg p-2"
+          >
+            {categories.map((category: any) => {
+              return (
+                <option key={category.id} value={category.id}>
+                  {category.type}
+                </option>
+              );
             })}
         </select>
+
         <div className="flex flex-col lg:flex-row lg:gap-10">
           <div className="flex flex-col gap-3">
             <h1 className="font-bold text-3xl">Nombre del instructor</h1>

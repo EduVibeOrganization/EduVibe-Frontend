@@ -20,11 +20,11 @@ export function middleware(request: NextRequest) {
             return NextResponse.redirect(new URL('/home-teacher', request.url));
         }
 
-        if(token && role === 'STUDENT' && ['/home-teacher', '/conference-creation',  '/teacher-information'].includes(pathname)) {
+        if(token && role === 'STUDENT' && ['/home-teacher','/teacher-information', '/create-course', '/admin-user', '/admin-account', '/admin-authorization', '/admin-business'].includes(pathname)) {
             return NextResponse.redirect(new URL('/home-student', request.url));
         }
 
-        if(token && role === 'TEACHER' && ['/home-student', '/conference-creation', '/student-information'].includes(pathname)) {
+        if(token && role === 'TEACHER' && ['/home-student', '/student-information', '/course-complete', '/admin-user', '/admin-account', '/admin-authorization', '/admin-business'].includes(pathname)) {
             return NextResponse.redirect(new URL('/home-teacher', request.url));
         }
         return NextResponse.next();
@@ -54,9 +54,14 @@ export const config = {
         '/confirm-password',
         '/courses',
         '/course-info',
+        '/create-course',
         '/course-video',
         '/teacher-information',
         '/transaction-student', 
-        '/transaction-teacher'
+        '/transaction-teacher',
+        '/admin-user', 
+        '/admin-account', 
+        '/admin-authorization', 
+        '/admin-business'
     ],
 };
