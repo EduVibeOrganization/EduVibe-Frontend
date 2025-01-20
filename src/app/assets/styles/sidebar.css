@@ -1,101 +1,152 @@
-.sidebar-header {
-    /*Aligment*/
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /*Size*/
-    width: 100%;
-    /*Margin*/
-    padding: 1.5rem 1rem;
-    gap: 0.75rem;
-    /*Color*/
-    border-bottom: 1px solid #444;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.sidebar-header h1 {
-    /*Text*/
-    font-size: 1.5rem;
-    font-weight: bolder;
-    text-transform: uppercase;
-    /*Margin*/
-    margin: 0;
-    letter-spacing: 2px;
-}
-
 .sidebar {
-    /*Alignment*/
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 100%;
+    background-color: #2d3748;
+    color: white;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: start;
-    /*Size*/
-    min-width: 12rem;
-    max-width: 18.5rem;
-    /*Margin*/
-    gap: 0.5rem;
-    /*Scroll*/
-    position: relative;
-    overflow-y: auto;
-    top: 0;
-    bottom: 0;
-    /*Resize*/
-    resize: horizontal;
+    justify-content: flex-start;
+    transition: width 0.4s ease, background-color 0.4s ease;
+    z-index: 1000;
+    padding: 20px 0;
+    gap: 15px;
+    overflow-y: auto; /* Scroll vertical para muchos ítems */
+    overflow-x: hidden; /* Evita scroll horizontal */
 }
 
-.sidebar-content {
-    /*Alignment*/
+/* Estados del sidebar */
+.sidebar.expanded {
+    width: 250px;
+    background-color: #374151;
+}
+
+.sidebar.collapsed {
+    width: 80px;
+    background-color: #2d3748;
+}
+
+.sidebar.collapsed .sidebar-item span {
+    opacity: 0;
+}
+
+/* Header del sidebar */
+.sidebar-header {
     display: flex;
-    flex-direction: column;
-    /*Size*/
-    width: 100%;
-    height: 100%;
-    /*Margin*/
-    gap: 0.75rem;
-}
-
-.sidebar-content-items {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-}
-
-.sidebar-item {
-    /*Alignment*/
-    display: flex;
-    justify-content: left;
-    /*Size*/
-    width: 100%;
-    /*Margin*/
-    padding: 0.5rem;
-    /*Color*/
-    background-color: transparent;
-    transition: background-color 0.3s, color 0.3s;
-}
-
-.sidebar-item:last-child {
-    margin-top: auto;
-    margin-bottom: 1rem;
-}
-  
-.sidebar-item:hover {
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    padding: 20px;
+    gap: 10px;
 }
 
 .sidebar-button {
-    /*Alignment*/
-    display: flex;
-    flex-direction: row;
-    justify-content: left;
-    align-items: center;
-    /*Size*/
-    width: 100%;
-    height: 100%;
-    /*Margin*/
-    gap: 1rem;
+    padding: 5px 10px; /* Aumenta el espacio interno si es necesario */
 }
 
-.sidebar-button .item-title {
-    text-align: left;
+/* Ítems del sidebar */
+.sidebar-item {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    height: 60px; /* Altura consistente para todos los botones */
+    width: 100%;
+    padding: 10px 15px;
+    cursor: pointer;
+    gap: 35px; /* Aumentado el espacio entre ícono y texto */
+    margin-bottom: 10px;
+    transition: background-color 0.4s ease, color 0.4s ease, transform 0.2s ease;
+    border-radius: 6px;
+    /*box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); !* Sombra sutil (Quitarlo o no)*!*/
 }
-  
+
+.sidebar-item:hover {
+    background-color: #4a5568; /* Fondo al pasar el cursor */
+    transform: scale(1.02); /* Efecto sutil de agrandamiento */
+}
+
+.sidebar-item.active {
+    background-color: #3182ce; /* Fondo azul para el ítem activo */
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra para enfoque */
+}
+
+/* Íconos */
+.sidebar-item i {
+    font-size: 1.6rem; /* Tamaño más grande para mejor visibilidad */
+    color: white;
+    text-align: center;
+    flex-shrink: 0; /* Asegura que el ícono no se deforme */
+    margin-right: 20px; /* Asegura un buen espacio entre ícono y texto */
+    align-self: center; /* Centrado vertical */
+    line-height: 50px; /* Igual a la altura del elemento */
+}
+
+/* Texto de los ítems */
+.sidebar-item span {
+    font-size: 1rem;
+    color: white;
+    display: none;
+    font-weight: 500; /* Mejor visibilidad del texto */
+    line-height: 1; /* Altura de línea para una buena separación */
+}
+
+/* Mostrar texto al expandir el sidebar */
+.sidebar.expanded .sidebar-item span {
+    display: inline-block;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+/* Hover */
+.sidebar-item:hover {
+    background-color: #4a5568;
+    transform: scale(1.02);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Sombra al pasar el cursor */
+    transition: all 0.3s ease;
+
+}
+
+/* Ajuste para el ítem seleccionado */
+.sidebar-item:hover span, .sidebar-item.active span {
+    font-weight: bold; /* Resaltar texto en hover o activo */
+}
+
+/* Último ítem al fondo */
+.sidebar-item:last-child {
+    margin-top: auto;
+}
+
+/* Botón de toggle */
+.toggle-btn {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    background-color: #3182ce;
+    color: white;
+    border: none;
+    padding: 0.5rem;
+    cursor: pointer;
+    font-size: 1.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.toggle-btn:hover {
+    background-color: #2b6cb0;
+    transform: scale(1.1); /* Pequeño efecto de agrandamiento */
+}
+
+/* Espaciado del contenido principal */
+.main-content {
+    margin-left: 80px;
+    padding: 20px;
+    transition: margin-left 0.3s ease;
+    color: white;
+}
+
+.sidebar.expanded ~ .main-content {
+    margin-left: 250px;
+}
