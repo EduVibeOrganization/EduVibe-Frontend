@@ -3,13 +3,14 @@ import { NextRequest, NextResponse } from "next/server";
 export function middleware(request: NextRequest) {
     const token = request.cookies.get("token")?.value;
     const payload = atob(token?.split('.')[1] || '');
+    const pathname = request.nextUrl.pathname;
     try{
-        const role = JSON.parse(payload).roles[0]
-        const pathname = request.nextUrl.pathname;
 
         if (!token && !['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname)) {
             return NextResponse.redirect(new URL('/sign-in', request.url));
         }
+
+        const role = JSON.parse(payload).roles[0]
 
         if (token && ['/sign-in', '/', '/sign-up', '/recover-password', '/select-role'].includes(pathname) && role === 'STUDENT') {
             return NextResponse.redirect(new URL('/home-student', request.url));

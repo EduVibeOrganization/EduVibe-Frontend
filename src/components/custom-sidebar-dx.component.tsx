@@ -2,6 +2,7 @@ import { useRouter } from "next/navigation";
 import "../app/assets/styles/sidebar.css";
 import "../app/assets/styles/public.css";
 import { SidebarItem2 } from "./custom-sidebar-item-2";
+import Cookies from "js-cookie";
 
 interface ICustomSidebarDX {
     mainBackgroundColor?: string;
@@ -13,6 +14,11 @@ interface ICustomSidebarDX {
 
 export function CustomSidebarDX({mainBackgroundColor, headerBackgroundColor, headerTextColor, headerIconColor, sidebarItems}: ICustomSidebarDX){
     const router = useRouter();
+    function onSignOut(){
+        Cookies.remove("token");
+        Cookies.remove("id");
+       router.push("/sign-in");
+    }
     return (
         <div className="sidebar" style={{backgroundColor: mainBackgroundColor}}>
             <header className="sidebar-header" style={{backgroundColor: headerBackgroundColor}}>
@@ -21,7 +27,7 @@ export function CustomSidebarDX({mainBackgroundColor, headerBackgroundColor, hea
             </header>
             <div className="sidebar-content">
                 {sidebarItems}
-                <SidebarItem2 icon={"pi pi-sign-out"} title={"Salir"} onClick={() => router.push("/sign-in")} textColor="white" backgroundAccentColor="#da0000" textAccentColor="white"/>
+                <SidebarItem2 icon={"pi pi-sign-out"} title={"Salir"} onClick={onSignOut} textColor="white" backgroundAccentColor="#da0000" textAccentColor="white"/>
             </div>
         </div>
     )
