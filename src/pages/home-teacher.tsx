@@ -121,7 +121,7 @@ function HomeStudent() {
                 <div className="max-w-xl z-10 lg:ml-0 lg:mr-8 mb-8 lg:mb-0">
                   <h1 className="text-4xl lg:text-5xl font-extrabold mb-6">
                     Alcanza tus metas con{" "}
-                    <span className="text-[#007BFF]">Handin</span>
+                    <span className="text-[#23A8E1]">Handin</span>
                   </h1>
                   <p className="text-lg lg:text-xl mb-8">
                     Si piensas que la tecnología es difícil, es porque no conoces
@@ -129,7 +129,7 @@ function HomeStudent() {
                     cursos. Por eso en español <b>#NadieExplicaMejor</b> que Handin.
                   </p>
                   <button
-                    className="bg-[#007BFF] text-white py-4 px-10 rounded-lg transition-colors"
+                    className="bg-[#23A8E1] text-white py-4 px-10 rounded-lg transition-colors"
                     onClick={() => router.push("/courses")}
                   >
                     Comienza ahora
