@@ -1,0 +1,78 @@
+.admin-content {
+    /*Aligment*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*Size*/
+    width: 100%;
+    /*Scroll*/
+    overflow-y: auto;
+}
+
+.content {
+    /*Aligment*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*Size*/
+    width: 80%;
+}
+
+.info {
+    /*Aligment*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /*Size*/
+    width: 100%;
+    /*Margin*/
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+    /*Border*/
+    border-radius: 0.5rem;
+    border-left: 4px solid;
+    /*Text*/
+    font-size: 0.9rem;
+    font-size: medium;
+    /*Color*/
+    background-color: #e9ecef;
+    color: #495057;
+}
+
+.table-section {
+    /*Size*/
+    width: 100%;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+.table th, .table td {
+    padding: 1rem;
+    text-align: left;
+}
+
+.table th {
+    background-color: #343A40;
+    color: white;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+.table tr:hover {
+    background-color: #e9ecef;
+}
+
+.table td {
+    border-bottom: 1px solid #ddd;
+}
