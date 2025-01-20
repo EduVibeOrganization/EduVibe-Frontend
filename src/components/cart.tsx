@@ -1,5 +1,6 @@
 import React from "react";
 import { CourseDTO } from "@/models/course.dto";
+import { useRouter } from "next/router";
 
 interface CartProps {
     cart: CourseDTO[];
@@ -8,6 +9,8 @@ interface CartProps {
 }
 
 const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
+    const router = useRouter(); // Instancia de useRouter
+
     return (
         <div className="fixed inset-0 bg-gray-800 bg-opacity-60 flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out">
             <div className="bg-white rounded-lg shadow-2xl p-8 max-w-lg w-full transition-transform transform duration-300 ease-in-out">
@@ -61,9 +64,15 @@ const Cart: React.FC<CartProps> = ({ cart, onRemoveFromCart, onClose }) => {
                             <span className="font-semibold text-gray-800 text-lg">
                                 Total: $
                                 {cart.reduce((total, course) => Number(total) + Number(course.price), 0)}                            </span>
-                            <button className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105">
+                                <button 
+                                   onClick={() => router.push({
+                                    pathname: "/transaction-student",
+                                    query: { cartData: JSON.stringify(cart), } // Envía los datos del carrito como un string
+                                })}
+                                className="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-6 rounded-md shadow-lg transition duration-300 transform hover:scale-105"
+                                >
                                 Proceder al Pago
-                            </button>
+                                </button>
                         </div>
                     </div>
                 )}

@@ -54,6 +54,8 @@ export const config = {
         '/courses',
         '/course-info',
         '/course-video',
-        '/teacher-information'
+        '/teacher-information',
+        '/transaction-student', 
+        '/transaction-teacher'
     ],
 };

@@ -11,6 +11,7 @@
   "dependencies": {
     "@daily-co/daily-js": "^0.74.0",
     "@daily-co/daily-react": "^0.22.0",
+    "@paypal/react-paypal-js": "^8.8.1",
     "@reduxjs/toolkit": "^2.5.0",
     "axios": "^1.7.9",
     "jotai": "^2.11.0",
